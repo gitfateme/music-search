@@ -2,9 +2,10 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
 import ErrorPage from "./ErrorPage";
+import MusicPlayerPage from "./MusicPlayerPage";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { Provider } from "react-redux";
-import store from "./store";
+import store from "./app/store";
 import "./index.css";
 
 //import reportWebVitals from './reportWebVitals';
@@ -13,6 +14,10 @@ const router = createBrowserRouter([
     path: "/",
     element: <App />,
     errorElement: <ErrorPage />,
+  },
+  {
+    path: "/musics/:musicId",
+    element: <MusicPlayerPage />,
   },
 ]);
 

@@ -1,12 +1,16 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import { useDispatch } from "react-redux";
+import { setSearchedItem } from "./app/searchItemSlice";
 
 import ItemsList from "./itemsList";
 
 export default function HomePage() {
   const [keyword, setKeyword] = useState("");
   const [result, setResult] = useState("");
+
+  const dispatch = useDispatch();
 
   async function getMusic() {
     const res = await axios.get("http://localhost:3000/musics", {
@@ -16,6 +20,7 @@ export default function HomePage() {
     });
     console.log(res);
     setResult(res.data);
+    dispatch(setSearchedItem(res.data));
   }
 
   function handleChange(e) {
@@ -28,7 +33,7 @@ export default function HomePage() {
   }
 
   return (
-    <div className="HomePage text-center container5">
+    <div className="HomePage text-center container">
       <div className=" border py-5">
         <h1>آهنگیاب</h1>
         <p>میتونی بخشی از آهنگ مورد علاقه ات رو وارد کنی و پیداش کنی</p>
@@ -49,7 +54,6 @@ export default function HomePage() {
             </div>
           </div>
         </form>
-        <Link to={`/gorbe`}>router test link</Link>
       </div>
       <ItemsList data={result} />
     </div>
