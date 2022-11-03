@@ -1,10 +1,11 @@
 import "./App.css";
-import HomePage from "./HomePage";
+import SearchPage from "./SearchPage";
 
 function App() {
   return (
-    <div className="App">
-      <HomePage />
+    <div className="App ">
+      <h1 className="text-center">آهنگیاب</h1>
+      <SearchPage />
     </div>
   );
 }
