@@ -5,6 +5,8 @@ import "./css/AppMusic.scss";
 import MusicPage from "./MusicPage";
 import MusicPlayerBar from "./MusicPlayerBar";
 import SearchPage from "./SearchPage";
+import Header from "./Header";
+import Footer from "./Footer";
 
 export default function AppMusic() {
   const { musicId } = useParams();
@@ -40,11 +42,12 @@ export default function AppMusic() {
     return <>loading</>;
   } else {
     return (
-      <div className="AppMusic">
-        <div className="not-music-bar">
-          <MusicPage music={music} />
-          <SearchPage />
-        </div>
+      <div className="AppMusic d-flex flex-column">
+        <Header />
+        <MusicPage music={music} />
+        <SearchPage />
+        <Footer />
+
         <MusicPlayerBar />
       </div>
     );

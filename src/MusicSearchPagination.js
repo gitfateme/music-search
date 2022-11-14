@@ -3,9 +3,9 @@ import { Link } from "react-router-dom";
 
 import "./css/MusicSearchPagination.scss";
 
-export default function Pagination(props) {
+export default function MusicSearchPagination(props) {
   const items = props.data;
-  const itemsPerPage = 4;
+  const itemsPerPage = 7;
   const [pagesCount, setPagesCount] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   const [currentItems, setCurrentItems] = useState([]);
@@ -40,7 +40,7 @@ export default function Pagination(props) {
   }, [currentPage, pagesCount]);
 
   const shouldShowLeftDots = useCallback(() => {
-    if (pagesCount <= 4 || currentPage < 4) {
+    if (pagesCount <= 5 || currentPage < 4) {
       setLeftDots(false);
     } else {
       setLeftDots(true);
@@ -88,12 +88,16 @@ export default function Pagination(props) {
     return <></>;
   } else {
     return (
-      <div className="ItemsList">
-        <ul className="list-group">
+      <div className="ItemsList my-5 container">
+        <h2>نتایج جستجو</h2>
+        <ul className="searched-list text-light">
           {currentItems.map((item, index) => {
             return (
-              <li key={index} className="list-group-item">
-                <Link to={`/musics/${item._id}`}>{item.title}</Link>
+              <li key={index} className="searched-list-item">
+                <Link to={`/musics/${item._id}`}>
+                  <img src={item.thumbnail} />
+                  {item.title}
+                </Link>
               </li>
             );
           })}
@@ -106,7 +110,7 @@ export default function Pagination(props) {
         >
           <nav aria-label="music page navigation">
             <ul className="pagination">
-              <li className="page-item">
+              <li className="page-item arrow-btn">
                 <a
                   onClick={prevPage}
                   className="page-link"
@@ -178,7 +182,7 @@ export default function Pagination(props) {
               <li className="page-item">
                 <a
                   onClick={nextPage}
-                  className="page-link"
+                  className="page-link arrow-btn"
                   href="/"
                   aria-label="Next"
                 >

@@ -8,7 +8,6 @@ export default function MusicPage({ music }) {
 
   function handleClick(e) {
     e.preventDefault();
-    console.log("change");
     dispatch(setCurrentMusic(music));
   }
   return (
@@ -16,13 +15,15 @@ export default function MusicPage({ music }) {
       <div className="container text-center">
         <h1>{music.title}</h1>
         <h2>{music.artist}</h2>
-        <img src={music.thumbnail} alt={music.title}></img>
+        <div className="img-container">
+          <img src={music.photo} alt={music.title} className="img-fluid"></img>
+        </div>
         <br />
         <p>{music.lyric}</p>
-        <a download href={music.hq_link} className="btn btn-success">
+        <a download href={music.hq_link} className="btn btn-secondary">
           دانلود
         </a>
-        <button onClick={handleClick} className="btn btn-warning">
+        <button onClick={handleClick} className="btn btn-secondary">
           پخش آهنگ
         </button>
       </div>

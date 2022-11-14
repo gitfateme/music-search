@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import "./css/SearchPage.scss";
 import axios from "axios";
-import Pagination from "./MusicSearchPagination";
+import MusicSearchPagination from "./MusicSearchPagination";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 
 export default function HomePage() {
   const [keyword, setKeyword] = useState("");
@@ -28,29 +30,22 @@ export default function HomePage() {
   }
 
   return (
-    <div className="HomePage text-center container">
-      <div className=" border py-5">
-        <p>میتونی بخشی از آهنگ مورد علاقه ات رو وارد کنی و پیداش کنی</p>
+    <div className="SearchPage ">
+      <div className="py-3 form-container container">
         <form method="get" onSubmit={handleSubmit}>
-          <div className="row justify-content-center">
-            <div className="col-12 col-md-6">
-              <input
-                onChange={handleChange}
-                className="form-control text-end"
-              />
-            </div>
+          <div className="search-icon text-danger">
+            <FontAwesomeIcon icon={faMagnifyingGlass} />
           </div>
-          <div className="row justify-content-center mt-3">
-            <div className="col-12 col-md-2">
-              <button className="btn btn-primary w-100" type="submit">
-                جستجو
-              </button>
-            </div>
-          </div>
+          <input
+            onChange={handleChange}
+            className="form-control text-end w-md-50 search-input border-danger bg-dark text-light"
+          />
+          <button className="btn btn-danger search-btn" type="submit">
+            جستجو
+          </button>
         </form>
       </div>
-      {/* <ItemsList data={result} /> */}
-      <Pagination data={result} />
+      <MusicSearchPagination data={result} />
     </div>
   );
 }

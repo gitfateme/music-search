@@ -1,6 +1,71 @@
 .MusicPlayerBar {
-  height: 60px;
-  background-color: rgb(58, 58, 58);
+  background-color: #000000;
   position: sticky;
   bottom: 0;
+  z-index: 9;
+  color: white;
+  .controls {
+    flex-grow: 1;
+    margin: 0 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .player-btn {
+    border: none;
+    width: 32px;
+    height: 32px;
+    margin-bottom: 15px;
+    background-color: transparent;
+    color: #fff;
+    svg {
+      width: 100%;
+      height: auto;
+    }
+    &:focus {
+      outline: none;
+    }
+    &:hover {
+      cursor: pointer;
+      color: rgba(255, 255, 255, 0.6);
+    }
+  }
+
+  .vol-btn {
+    width: 42px;
+
+  }
+  .bar {
+    user-select: none;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    max-width: 840px;
+  }
+  .bar-progress {
+    flex: 1;
+    border-radius: 5px;
+    margin: 0 20px;
+    height: 8px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    background-color: #464646;
+  }
+  .bar-progress-knob {
+    position: relative;
+    height: 16px;
+    width: 16px;
+    border: 1px solid #ffffff;
+    border-radius: 50%;
+    background-color: #ffffff;
+  }
+  .bar-played {
+    background-color: #DC3545;
+    border-radius: 5px;
+    margin: 0 -15px;
+    height: 10px;
+  }
 }
