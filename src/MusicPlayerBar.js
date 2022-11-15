@@ -11,8 +11,15 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 export default function MusicPlayerBar() {
-  const { curTime, duration, playing, setPlaying, setClickedTime } =
-    useAudioPlayer();
+  const {
+    curTime,
+    duration,
+    playing,
+    setPlaying,
+    setClickedTime,
+    vol,
+    setVol,
+  } = useAudioPlayer();
 
   const music = useSelector((state) => state.music.data);
   const audioRef = useRef();
@@ -20,13 +27,15 @@ export default function MusicPlayerBar() {
 
   useEffect(() => {
     setPlaying(true);
+    setVol(audioRef.current.volume);
+
     if (audioRef.current) {
       audioRef.current.pause();
       audioRef.current.load();
       audioRef.current.play();
       console.log(music);
     }
-  }, [music, setPlaying]);
+  }, [music, setPlaying, setVol]);
 
   function formatDuration(duration) {
     let time = Math.ceil(duration);
@@ -49,12 +58,9 @@ export default function MusicPlayerBar() {
 
   function calcClickedTime(e) {
     const clickPositionInPage = e.pageX;
-    console.log(e.pageX);
     const bar = document.querySelector(".bar-progress");
     const barStart = bar.getBoundingClientRect().left + window.scrollX;
-    console.log(barStart);
     const barWidth = bar.offsetWidth;
-    console.log(barWidth);
     const clickPositionInBar = clickPositionInPage - barStart;
     const timePerPixel = duration / barWidth;
     return timePerPixel * clickPositionInBar;
@@ -72,11 +78,17 @@ export default function MusicPlayerBar() {
     };
 
     document.addEventListener("mousemove", updateTimeOnMove);
-
     document.addEventListener("mouseup", () => {
       document.removeEventListener("mousemove", updateTimeOnMove);
-      setPlaying(true);
     });
+  }
+
+  function handleVolClcik(e) {
+    if (vol === 1) {
+      setVol(0);
+    } else if (vol === 0) {
+      setVol(1);
+    }
   }
 
   return (
@@ -98,6 +110,7 @@ export default function MusicPlayerBar() {
             <div
               className="bar-progress"
               onMouseDown={(e) => handleTimeDrag(e)}
+              onMouseUp={() => setPlaying(true)}
             >
               <span
                 className="bar-progress-knob"
@@ -117,7 +130,10 @@ export default function MusicPlayerBar() {
               <div>
                 <button
                   className="player-btn"
-                  onClick={() => setPlaying(false)}
+                  onClick={() => {
+                    console.log("pause btn clicked");
+                    setPlaying(false);
+                  }}
                 >
                   <FontAwesomeIcon icon={faPause} />
                 </button>
@@ -137,7 +153,10 @@ export default function MusicPlayerBar() {
                 </button>
               </div>
             )}
-            <button className="player-btn vol-btn">
+            <button
+              className="player-btn vol-btn"
+              onClick={(e) => handleVolClcik()}
+            >
               <FontAwesomeIcon icon={faVolumeHigh} />
             </button>
           </div>

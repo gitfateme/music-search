@@ -7,6 +7,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { Provider } from "react-redux";
 import store from "./app/store";
 import "./css/index.css";
+import MusicPlayerBar from "./MusicPlayerBar";
 
 const router = createBrowserRouter([
   {
@@ -26,6 +27,7 @@ root.render(
   <React.StrictMode>
     <Provider store={store}>
       <RouterProvider router={router} />
+      <MusicPlayerBar />
     </Provider>
   </React.StrictMode>
 );

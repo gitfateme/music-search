@@ -12,7 +12,7 @@ export default function HomePage() {
   async function getMusic() {
     const res = await axios.get("http://localhost:3000/musics", {
       params: {
-        test: keyword,
+        searchKeyword: keyword,
       },
     });
     console.log(res);

@@ -88,14 +88,14 @@ export default function MusicSearchPagination(props) {
     return <></>;
   } else {
     return (
-      <div className="ItemsList my-5 container">
+      <div className="ItemsList mt-0 mb-3 container">
         <h2>نتایج جستجو</h2>
         <ul className="searched-list text-light">
           {currentItems.map((item, index) => {
             return (
               <li key={index} className="searched-list-item">
                 <Link to={`/musics/${item._id}`}>
-                  <img src={item.thumbnail} />
+                  <img src={item.thumbnail} alt={item.title} />
                   {item.title}
                 </Link>
               </li>

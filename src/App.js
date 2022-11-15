@@ -1,8 +1,8 @@
-import "./App.css";
+import "./css/App.css";
 import SearchPage from "./SearchPage";
-import MusicPlayerBar from "./MusicPlayerBar";
 import Header from "./Header";
 import Footer from "./Footer";
+import Trending from "./Trending";
 
 function App() {
   return (
@@ -13,8 +13,9 @@ function App() {
         میتونی بخشی از آهنگ مورد علاقه ات رو وارد کنی و پیداش کنی
       </p>
       <SearchPage />
+      <Trending />
       <Footer />
-      <MusicPlayerBar />
+      {/* <MusicPlayerBar /> */}
     </div>
   );
 }

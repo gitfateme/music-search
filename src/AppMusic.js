@@ -3,7 +3,6 @@ import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./css/AppMusic.scss";
 import MusicPage from "./MusicPage";
-import MusicPlayerBar from "./MusicPlayerBar";
 import SearchPage from "./SearchPage";
 import Header from "./Header";
 import Footer from "./Footer";
@@ -47,8 +46,7 @@ export default function AppMusic() {
         <MusicPage music={music} />
         <SearchPage />
         <Footer />
-
-        <MusicPlayerBar />
+        {/* <MusicPlayerBar /> */}
       </div>
     );
   }
