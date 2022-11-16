@@ -5,7 +5,7 @@ function useAudioPlayer() {
   const [curTime, setCurTime] = useState();
   const [playing, setPlaying] = useState(false);
   const [clickedTime, setClickedTime] = useState();
-  const [vol, setVol] = useState();
+  const [vol, setVol] = useState(1);
 
   useEffect(() => {
     const audio = document.getElementById("audio");

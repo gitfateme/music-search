@@ -1,17 +1,3 @@
-.MusicPage{
-  padding-top: 30px;
-  h1 {
-    font-size: 1.5rem;
-  }
-  h2 {
-    font-size: 1.2rem;
-  }
-  .img-container {
-    max-width: 320px;
-    max-height: 320px;
-    margin: 0 auto;
-    img {
-      border-radius: 16px;
-    }
-  }
+.MusicPage {
+  min-height: 100vh;
 }

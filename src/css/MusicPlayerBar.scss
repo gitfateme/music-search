@@ -20,6 +20,7 @@
     margin-bottom: 15px;
     background-color: transparent;
     color: #fff;
+    margin-left: 20px;
     svg {
       width: 100%;
       height: 100%;
@@ -34,11 +35,46 @@
   }
 
   .vol-btn {
+    border: none;
+    background-color: transparent;
+    color: #fff;
     width: 35px;
+    margin-top: 2px;
+    margin-left: 5px;
     svg {
       width: 100%;
       height: 100%;
     }
+    &:focus {
+      outline: none;
+    }
+    &:hover {
+      cursor: pointer;
+      color: rgba(255, 255, 255, 0.6);
+    }
+  }
+
+  .vol-bar {
+    user-select: none;
+    display: flex;
+    min-width: 65px;
+    max-width: 100px;
+    margin-top: 8px;
+
+  }
+  .vol-bar-progress{
+    flex: 1;
+    border-radius: 5px;
+    height: 8px;
+    align-items: center;
+    cursor: pointer;
+    background-color: #464646;
+  }
+  .vol-bar-colored {
+    width: 100%;
+    height: 100%;
+    border-radius: 5px;
+    background-color: #DC3545;
   }
   .bar {
     user-select: none;

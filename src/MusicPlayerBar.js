@@ -25,6 +25,8 @@ export default function MusicPlayerBar() {
   const audioRef = useRef();
   const curPercentage = (curTime / duration) * 100;
 
+  const curVolPercentage = vol * 100;
+
   useEffect(() => {
     setPlaying(true);
     setVol(audioRef.current.volume);
@@ -66,6 +68,30 @@ export default function MusicPlayerBar() {
     return timePerPixel * clickPositionInBar;
   }
 
+  function setClickedVol(e) {
+    const clickPositionInPage = e.pageX;
+    const volBar = document.querySelector(".vol-bar-progress");
+    const barStart = volBar.getBoundingClientRect().left + window.scrollX;
+    const barWidth = volBar.offsetWidth;
+    const clickPositionInBar = clickPositionInPage - barStart;
+    const volPerPixel = 1 / barWidth;
+    const newVol = volPerPixel * clickPositionInBar;
+    if (newVol < 0.05) {
+      setVol(0);
+    } else if (newVol > 0.95) {
+      setVol(1);
+    } else {
+      setVol(newVol);
+    }
+  }
+
+  function handleVolDrag(e) {
+    document.addEventListener("mousemove", setClickedVol);
+    document.addEventListener("mouseup", () => {
+      document.removeEventListener("mousemove", setClickedVol);
+    });
+  }
+
   function onTimeUpdate(time) {
     setClickedTime(time);
   }
@@ -84,10 +110,10 @@ export default function MusicPlayerBar() {
   }
 
   function handleVolClcik(e) {
-    if (vol === 1) {
+    if (vol > 0) {
       setVol(0);
     } else if (vol === 0) {
-      setVol(1);
+      setVol(0.5);
     }
   }
 
@@ -99,9 +125,9 @@ export default function MusicPlayerBar() {
           Your browser does not support the <code>audio</code> element.
         </audio>
         <div className=" controls pt-2 ">
-          <div className="control-btns d-flex ">
+          <div className="control-btns d-flex">
             <div>
-              <span>{music.title}</span>
+              <span> {`${music.artist} - ${music.song}`}</span>
             </div>
           </div>
 
@@ -125,7 +151,7 @@ export default function MusicPlayerBar() {
               {music.link ? formatDuration(duration) : "00:00"}
             </span>
           </div>
-          <div className="btns-row d-flex">
+          <div className="btns-row d-flex flex-row w-100 justify-content-center">
             {playing ? (
               <div>
                 <button
@@ -153,12 +179,22 @@ export default function MusicPlayerBar() {
                 </button>
               </div>
             )}
-            <button
-              className="player-btn vol-btn"
-              onClick={(e) => handleVolClcik()}
-            >
-              <FontAwesomeIcon icon={faVolumeHigh} />
-            </button>
+            <div>
+              <button className=" vol-btn" onClick={(e) => handleVolClcik()}>
+                <FontAwesomeIcon icon={faVolumeHigh} />
+              </button>
+            </div>
+            <div className="vol-bar">
+              <div
+                className="vol-bar-progress"
+                onMouseDown={(e) => handleVolDrag(e)}
+              >
+                <div
+                  className="vol-bar-colored"
+                  style={{ width: `${curVolPercentage}%` }}
+                ></div>
+              </div>
+            </div>
           </div>
         </div>
       </div>

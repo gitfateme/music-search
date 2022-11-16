@@ -1,38 +1,49 @@
+import React, { useState, useEffect } from "react";
+import { useParams, useNavigate } from "react-router-dom";
+import axios from "axios";
 import "./css/MusicPage.scss";
-import React, { useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { setCurrentMusic } from "./app/musicSlice";
+import MusicComponent from "./MusicComponent";
+import Header from "./Header";
+import Footer from "./Footer";
 
-export default function MusicPage({ music }) {
-  const dispatch = useDispatch();
+export default function MusicPage() {
+  const [music, setMusic] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [notFound, setNotFound] = useState(false);
+
+  const navigate = useNavigate();
+  const { musicId } = useParams();
 
   useEffect(() => {
-    document.title = `${music.artist} - ${music.song} - GoozAhang.com`;
-  });
+    async function getMusic() {
+      await axios
+        .get(`http://localhost:3000/musics/${musicId}`)
+        .then((res) => {
+          setMusic(res.data);
+        })
+        .catch((err) => {
+          setNotFound(true);
+        });
+      setLoading(false);
+    }
+    getMusic();
+  }, [musicId, loading]);
 
-  function handleClick(e) {
-    e.preventDefault();
-    dispatch(setCurrentMusic(music));
-  }
-  return (
-    <div className="MusicPage">
-      <div className="container text-center">
-        <h1 className="mb-3">
-          {music.artist} - {music.song}
-        </h1>
-        <div className="img-container">
-          <img src={music.photo} alt={music.title} className="img-fluid"></img>
-        </div>
-        <div className="btns-row py-3">
-          <a download href={music.hq_link} className="btn btn-secondary mx-3">
-            دانلود
-          </a>
-          <button onClick={handleClick} className="btn btn-secondary">
-            پخش آهنگ
-          </button>
-        </div>
-        <p>{music.lyric}</p>
+  useEffect(() => {
+    if (notFound) {
+      navigate("/");
+    }
+  }, [notFound, navigate]);
+
+  if (loading) {
+    return <>loading</>;
+  } else {
+    return (
+      <div className="MusicPage d-flex flex-column">
+        <Header />
+        <MusicComponent music={music} />
+        <Footer />
       </div>
-    </div>
-  );
+    );
+  }
 }

@@ -3,8 +3,6 @@ import { useDispatch } from "react-redux";
 import "./css/Trending.scss";
 import axios from "axios";
 import { setCurrentMusic } from "./app/musicSlice";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPlayCircle } from "@fortawesome/free-solid-svg-icons";
 
 export default function Trending() {
   const [data, setData] = useState([]);
@@ -41,15 +39,12 @@ export default function Trending() {
                   }}
                   className="d-flex"
                 >
-                  <div className="play-icon me-3 mt-2">
-                    <FontAwesomeIcon icon={faPlayCircle} />
-                  </div>
                   <div>
                     <img src={item.thumbnail} alt={item.title} />
                   </div>
                   <div>
                     <span>
-                      {index + 1} - {item.title}
+                      {index + 1} - {`${item.artist} - ${item.song}`}
                     </span>
                   </div>
                 </button>

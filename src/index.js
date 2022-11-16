@@ -1,23 +1,29 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import App from "./App";
+import Home from "./Home";
 import ErrorPage from "./ErrorPage";
-import AppMusic from "./AppMusic";
+import MusicPage from "./MusicPage";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { Provider } from "react-redux";
 import store from "./app/store";
 import "./css/index.css";
 import MusicPlayerBar from "./MusicPlayerBar";
+import SearchPage from "./SearchPage";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <App />,
+    element: <Home />,
     errorElement: <ErrorPage />,
   },
   {
-    path: "/musics/:musicId",
-    element: <AppMusic />,
+    path: "/musics/:permLink/:musicId",
+    element: <MusicPage />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: "/search/",
+    element: <SearchPage />,
     errorElement: <ErrorPage />,
   },
 ]);

@@ -2,5 +2,42 @@
   height: 70px;
   background-color: #000;
   border-bottom: 1px solid rgba(255,255,255, .15);
-  padding: 25px;
+  text-align: center;
+    .logo {
+     span {
+      display: block;
+      padding-top: 20px;
+     }
+a{
+  color: white;
+}   
+ }
+
+ .search-btn {
+  a {
+    padding: 0;
+  }
 }
+
+    a {
+      padding: 0 30px;   
+      height: 70px;
+      display: block;
+      text-decoration: none;
+      color: #DC3545;
+      transition: all .2s ease-in;
+
+      &:hover {
+        background-color: #dc35466e;
+        border-bottom: 3px solid #DC3545;
+      }
+      svg {
+        width: 40%;
+        height: 100%
+      
+    }
+
+
+ }
+
+  }

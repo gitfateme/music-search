@@ -94,9 +94,9 @@ export default function MusicSearchPagination(props) {
           {currentItems.map((item, index) => {
             return (
               <li key={index} className="searched-list-item">
-                <Link to={`/musics/${item._id}`}>
+                <Link to={`/musics/${item.permlink}/${item._id}`}>
                   <img src={item.thumbnail} alt={item.title} />
-                  {item.title}
+                  {`${item.artist} - ${item.song}`}
                 </Link>
               </li>
             );

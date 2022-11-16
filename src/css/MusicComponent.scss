@@ -1,0 +1,35 @@
+.MusicComponent{
+  padding-top: 30px;
+  h1 {
+    font-size: 1.5rem;
+  }
+  h2 {
+    font-size: 1.2rem;
+  }
+  .img-container {
+    max-width: 320px;
+    max-height: 320px;
+    margin: 0 auto;
+    img {
+      border-radius: 16px;
+    }
+  }
+  hr {
+    max-width: 750px;
+    margin: 20px auto;
+  }
+  
+  .music-info {
+  }
+  .Trending {
+    background-color: black;
+    max-width: 500px;
+    margin: 0 auto;
+    button {
+      justify-content: start;
+    }
+    li {
+      width: 100% ;
+    }
+  }
+}
