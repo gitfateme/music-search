@@ -9,6 +9,7 @@ function Home() {
     <div className="Home d-flex flex-column">
       <Header />
       <h1 className="text-center pt-5"> GoozAhang</h1>
+
       <p className="text-center">میتونی بخشی از آهنگ رو وارد کنی و پیداش کنی</p>
       <Search />
       <hr className="mx-5 mt-5" />

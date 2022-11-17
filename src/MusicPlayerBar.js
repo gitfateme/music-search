@@ -118,7 +118,7 @@ export default function MusicPlayerBar() {
   }
 
   return (
-    <div className={`MusicPlayerBar py-01 ${music.id ? "" : "d-none"}`}>
+    <div className={`MusicPlayerBar py-1 ${music.id ? "" : "d-none"}`}>
       <div className="">
         <audio id="audio" ref={audioRef}>
           <source src={music.lq_link} />

@@ -50,8 +50,10 @@ export default function MusicComponent({ music }) {
               )}
             </span>
             <p>
-              <span className="d-block my-3"> متن آهنگ</span>
-              <hr />
+              {music.lyric ? (
+                <span className="d-block my-3"> متن آهنگ</span>
+              ) : null}
+              {music.lyric ? <hr /> : null}
               {music.lyric.split("\n").map((string) => {
                 return (
                   <span>

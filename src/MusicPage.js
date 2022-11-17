@@ -39,7 +39,7 @@ export default function MusicPage() {
     return <>loading</>;
   } else {
     return (
-      <div className="MusicPage d-flex flex-column">
+      <div className="MusicPage d-flex flex-column ">
         <Header />
         <MusicComponent music={music} />
         <Footer />
