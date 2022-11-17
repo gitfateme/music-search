@@ -1,0 +1,44 @@
+.MobileHome {
+  padding-bottom: 125px;
+
+  .mobile-home-container {
+    padding: 30px;
+  }
+  
+  h2 {
+    font-weight: 300;
+    line-height: 1.5;
+    font-size: 24px;
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+
+
+    li {
+      height: 60px;
+      padding: 10px;
+      position: relative;
+
+      span {
+        display: block;
+      }
+      .song-span {
+        font-size: 15px;
+      }
+
+      .artist-span {
+        font-size: 13px;
+        color: var(--secondary-text);
+      }
+      button {
+        position: absolute;
+        right: 0;
+        top: calc(50% - 15px);
+      }
+    }
+
+
+  }
+}

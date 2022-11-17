@@ -1,0 +1,36 @@
+:root {
+  --primary-lighter: #333333;
+  --primary-default: #242424;
+  --primary-darker: #1e1e1e;
+  --accent-default: #689f38;
+  --accent-lighter: #B4CF9C;
+  --accent-contrast: rgba(255, 255, 255, 1);
+  --accent-emphasis: rgb(180,207,156, 0.1);
+  --foreground-base: #fff;
+  --text: #fff;
+  --hint-text: rgba(255, 255, 255, 0.5);
+  --secondary-text: rgba(255, 255, 255, 0.7);
+  --label: rgba(255, 255, 255, 0.7);
+  --background: #23232C;
+  --background-alternative: #1e1e26;
+  --divider-lighter: rgba(255, 255, 255, 0.06);
+  --divider-default: rgba(255, 255, 255, 0.12);
+  --disabled-button-text: rgba(255, 255, 255, 0.3);
+  --disabled-toggle: #000;
+  --chip: #353543;
+  --hover: rgba(255, 255, 255, 0.04);
+  --selected-button: #212121;
+  --disabled-button: rgba(255, 255, 255, 0.12);
+  --raised-button: #2a2a35;
+  --backdrop: #BDBDBD;
+  --link: #689f38;
+}
+
+
+body {
+  margin: 0;
+  font-family: 'Roboto', "Helvetica Neue", sans-serif;
+  background-color: var(--background-alternative);
+  color: #f6f6f6;
+}
+

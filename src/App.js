@@ -1,11 +1,11 @@
 import React from "react";
 import DesktopHome from "./DesktopHome";
-import MobileHome from "./MobileHome";
+import MobileApp from "./MobileApp";
 import useViewport from "./useViewPort";
 
-export default function Home() {
+export default function App() {
   const { width } = useViewport();
   const breakpoint = 768;
 
-  return width < breakpoint ? <MobileHome /> : <DesktopHome />;
+  return width < breakpoint ? <MobileApp /> : <DesktopHome />;
 }

@@ -1,0 +1,9 @@
+.MobileControls {
+  height: 55px;
+  width: 100%;
+  background-color: var(--background-alternative)	;
+  position: fixed;
+  bottom: 70px;
+  overflow: hidden;
+  border-top: 5px solid var(--divider-default);
+}

@@ -1,0 +1,11 @@
+.MobileNav {
+  height: 70px;
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+  overflow: hidden;
+
+  border-top: 1px solid var(--divider-default);
+  background-color: var(--background-alternative);
+  padding: 15px;
+}
