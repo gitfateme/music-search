@@ -1,3 +1,10 @@
+
+  @mixin text-ellipsis {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
+  
 .MobileHome {
   padding-bottom: 125px;
 
@@ -9,6 +16,19 @@
     font-weight: 300;
     line-height: 1.5;
     font-size: 24px;
+    @include text-ellipsis;
+
+  }
+  .h2-icon {
+    width: 14px;
+    height: 14px;
+    margin: 7px;
+    color: rgba(255,255,255, .7);
+
+    svg {
+      height: 100%;
+      width: 100%;
+    }
   }
 
   ul {
@@ -20,9 +40,16 @@
       height: 60px;
       padding: 10px;
       position: relative;
+      overflow: hidden;
+      border-radius: 4px;
+      &:hover {
+        background-color: var(--hover);
+      }
 
       span {
         display: block;
+        @include text-ellipsis;
+
       }
       .song-span {
         font-size: 15px;
@@ -35,10 +62,109 @@
       button {
         position: absolute;
         right: 0;
-        top: calc(50% - 15px);
+        top: calc(50% - 23px);
+        background-color: transparent;
+        color: var(--secondary-text);
+        border: 0;
+        padding: 10px 15px;
+        
+        svg {
+          height: 20px
+        }
+      } 
+    }
+  }
+
+  .img-container {
+    overflow: hidden;
+    border-radius: 4px;
+    box-shadow: 0 3px 5px -1px rgb(0 0 0 / 20%), 0 5px 8px rgb(0 0 0 / 14%), 0 1px 14px rgb(0 0 0 / 12%);
+    img {
+      width: 100%;
+
+    }
+  }
+
+  .heading-2 {
+    position: relative;
+    display: block;
+
+    h2 {
+      max-width: 60%;
+
+    }
+  }
+  .carousel-controls {
+    position: absolute;
+    right: 0;
+    background-color: var(--background-alternative);
+    button {
+      background-color: transparent;
+      border: 0;
+      color: white;
+      width: 40px;
+      height: 40px;
+      font-size: 18px;
+      margin-top: 2px;
+      transition: all 0.1s ease-out;
+  
+      border-radius: 30px;
+
+      svg {
+        height: 55%;
+        text-align: center;
       }
+
+      &:active {
+        background-color: var(--accent-emphasis);
+        border-radius: 30px;
+      }
+
+      &:disabled {
+        color: var(--disabled-button-text);
+        &:active {
+          background-color: transparent;
+        }
+      }
+
     }
 
+  }
 
+  .mobilehome-carousel {
+    overflow: hidden;
+
+    .mobilehome-carousel-inner {
+      white-space: nowrap;
+      transition: transform 0.5s ease-in;
+
+      .mobilehome-carousel-item {
+        padding: 10px;
+        display: inline-block;
+        align-items: center;
+        justify-content: center;
+        width: 50%;
+        text-align: center;
+
+
+        .item-texts {
+          padding: 10px;
+          span {
+            display: block;
+            font-size: 14px;
+            line-height: 20px;
+            @include text-ellipsis;
+
+          }
+          .title-text {
+
+          }
+          .artist-text {
+            color: rgba(255,255,255, .7);
+
+          }
+        }
+      }
+    }
   }
 }

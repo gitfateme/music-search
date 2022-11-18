@@ -4,8 +4,25 @@
   position: fixed;
   bottom: 0;
   overflow: hidden;
-
   border-top: 1px solid var(--divider-default);
   background-color: var(--background-alternative);
   padding: 15px;
+
+  nav {
+    text-align: center;
+    .mobilenav-text {
+      font-size: 11px;
+      display: block;
+    }
+    .mobilenav-icon {
+      text-align: center;
+      width: 20px;
+      height: 20px;
+      margin: 5px auto;
+      svg {
+        height: 100%;
+        width: 100%;
+      } 
+    }
+  }
 }
