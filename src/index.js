@@ -7,6 +7,7 @@ import { Provider } from "react-redux";
 import store from "./app/store";
 import "./css/index.scss";
 import Home from "./Home";
+import Search from "./Search";
 
 const router = createBrowserRouter([
   {
@@ -17,6 +18,10 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Home />,
+      },
+      {
+        path: "/search",
+        element: <Search />,
       },
     ],
   },

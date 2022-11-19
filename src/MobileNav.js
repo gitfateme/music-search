@@ -7,31 +7,35 @@ import {
   faRankingStar,
   faHouse,
   faUser,
-  faM,
 } from "@fortawesome/free-solid-svg-icons";
+import { Link } from "react-router-dom";
 
 export default function MobileNav() {
   return (
     <div className="MobileNav">
       <nav className="d-flex justify-content-around">
-        <div className="mobilenav-item">
-          <div className="mobilenav-icon">
-            <FontAwesomeIcon icon={faHouse} />
+        <Link to="/">
+          <div className="mobilenav-item">
+            <div className="mobilenav-icon">
+              <FontAwesomeIcon icon={faHouse} />
+            </div>
+            <span className="mobilenav-text">Home</span>
           </div>
-          <span className="mobilenav-text">Home</span>
-        </div>
+        </Link>
         <div className="mobilenav-item">
           <div className="mobilenav-icon">
             <FontAwesomeIcon icon={faRankingStar} />
           </div>
           <span className="mobilenav-text">Top 50</span>
         </div>
-        <div className="mobilenav-item">
-          <div className="mobilenav-icon">
-            <FontAwesomeIcon icon={faMagnifyingGlass} />
+        <Link to="/search">
+          <div className="mobilenav-item">
+            <div className="mobilenav-icon">
+              <FontAwesomeIcon icon={faMagnifyingGlass} />
+            </div>
+            <span className="mobilenav-text">Search</span>
           </div>
-          <span className="mobilenav-text">Search</span>
-        </div>
+        </Link>
         <div className="mobilenav-item">
           <div className="mobilenav-icon">
             <FontAwesomeIcon icon={faMusic} />

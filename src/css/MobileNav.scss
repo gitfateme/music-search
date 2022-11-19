@@ -1,4 +1,5 @@
 .MobileNav {
+  z-index: 10;
   height: 70px;
   width: 100%;
   position: fixed;
@@ -7,6 +8,11 @@
   border-top: 1px solid var(--divider-default);
   background-color: var(--background-alternative);
   padding: 15px;
+
+  a {
+    text-decoration: none;
+    color: var(--accent-contrast);
+  }
 
   nav {
     text-align: center;

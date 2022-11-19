@@ -119,7 +119,7 @@ export default function MusicPlayerBar() {
 
   return (
     <div className={`MusicPlayerBar py-1 ${music.id ? "" : "d-none"}`}>
-      <div className="">
+      <div>
         <audio id="audio" ref={audioRef}>
           <source src={music.lq_link} />
           Your browser does not support the <code>audio</code> element.

@@ -78,10 +78,56 @@
   .img-container {
     overflow: hidden;
     border-radius: 4px;
-    box-shadow: 0 3px 5px -1px rgb(0 0 0 / 20%), 0 5px 8px rgb(0 0 0 / 14%), 0 1px 14px rgb(0 0 0 / 12%);
+
+    // height: 100%;
+    position: relative;
+
+
+    .img-container-hover {
+      width: 100%;
+      height: 100%;
+     position: absolute;
+     top: 0;
+     right: 0;
+      transition: all 0.2s ease-out;
+      cursor: pointer;
+
+    }
+
+    .img-container-hover:hover {
+      background-color: rgba(0,0,0, 0.8);
+
+      .hover-icon {
+        display: block;
+      }
+    }
+
+    .hover-icon {
+      display: none;
+      width: 60px;
+      height: 60px;
+      position: absolute;
+      padding: 8px;
+      left: calc(50% - 30px);
+      top: calc(50% - 30px);
+      border: 1px solid white;
+      border-radius: 50%;
+      transition: all .3s cubic-bezier(0,0,0,2.41);
+      align-items: center;
+      justify-content: center;
+      svg {
+        width: 60%;
+        height: 60%;
+        display: block;
+        margin: 9px 9px;
+      }
+      &:hover {
+        scale: 1.2;
+      }
+    }
     img {
       width: 100%;
-
+      box-shadow: 0 3px 5px -1px rgb(0 0 0 / 20%), 0 5px 8px rgb(0 0 0 / 14%), 0 1px 14px rgb(0 0 0 / 12%);
     }
   }
 
@@ -91,7 +137,6 @@
 
     h2 {
       max-width: 60%;
-
     }
   }
   .carousel-controls {
@@ -107,28 +152,23 @@
       font-size: 18px;
       margin-top: 2px;
       transition: all 0.1s ease-out;
-  
-      border-radius: 30px;
 
+      border-radius: 30px;
       svg {
         height: 55%;
         text-align: center;
       }
-
       &:active {
         background-color: var(--accent-emphasis);
         border-radius: 30px;
       }
-
       &:disabled {
         color: var(--disabled-button-text);
         &:active {
           background-color: transparent;
         }
       }
-
     }
-
   }
 
   .mobilehome-carousel {
@@ -146,7 +186,6 @@
         width: 50%;
         text-align: center;
 
-
         .item-texts {
           padding: 10px;
           span {
@@ -154,17 +193,42 @@
             font-size: 14px;
             line-height: 20px;
             @include text-ellipsis;
-
-          }
-          .title-text {
-
           }
           .artist-text {
             color: rgba(255,255,255, .7);
-
           }
         }
       }
     }
+  }
+
+  .popular-albums-container {
+    h2 {
+      max-width: 70%;
+    }
+    .popular-albums-items-container {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      row-gap: 20px;
+      column-gap: 20px;
+    }
+    .popular-albums-item {
+      width: 100%;
+      height: auto;
+
+      .item-texts {
+        
+        text-align: center;
+        margin-top: 10px;
+        span {
+          font-size: 14px;
+          line-height: 20px;
+        }
+        .title-text {
+          display: block;
+        }
+      }
+    }
+
   }
 }
