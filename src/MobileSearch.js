@@ -5,7 +5,7 @@ export default function MobileSearch() {
   return (
     <div className="MobileSearch">
       <div className="search-form">
-        <form>
+        <form onSubmit={(e) => e.preventDefault()}>
           <input placeholder="Search..."></input>
         </form>
       </div>

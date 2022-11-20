@@ -18,6 +18,10 @@
         background-color: var(--divider-default);
   
         .bar-progress {
+          height: 100%;
+          cursor: pointer;
+        }
+        .bar-played {
           background-color: var(--accent-default);
           height: 100%;
         }
