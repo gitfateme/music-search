@@ -61,7 +61,7 @@ export default function MobileControls() {
   return (
     <div className="MobileControls">
       <audio id="audio" ref={audioRef}>
-        <source src="https://host2.media-rj.com/media/mp3/aac-128/109850-6c42592db63c0de.m4a" />
+        <source src={music.lq_link} />
         Your browser does not support the <code>audio</code> element.
       </audio>
       <div className="bar-row">
@@ -85,8 +85,8 @@ export default function MobileControls() {
           </div>
         </div>
         <div className="track-info">
-          <span className="title">Roye To Hassasam asdasdas</span>
-          <span className="artist">Vahid Moradpour</span>
+          <span className="title">{music.song}</span>
+          <span className="artist">{music.artist}</span>
         </div>
         <div className="playback-controls">
           <button className="back">

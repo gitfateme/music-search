@@ -8,13 +8,17 @@ import {
   faPlay,
 } from "@fortawesome/free-solid-svg-icons";
 import { useOutletContext } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { setCurrentMusic } from "./app/musicSlice";
 
 export default function MobileHome() {
   const [activeIndex, setActiveIndex] = useState(0);
   const popularData = useOutletContext();
+
+  const dispatch = useDispatch();
   const dataLength = popularData.length;
 
-  const updateIndex = (newIndex) => {
+  const updateCarouselIndex = (newIndex) => {
     if (newIndex < 0) {
       newIndex = 0;
     } else if (newIndex > dataLength - 1) {
@@ -23,6 +27,10 @@ export default function MobileHome() {
     setActiveIndex(newIndex);
     setActiveIndex(newIndex);
   };
+
+  function setMusic(music) {
+    dispatch(setCurrentMusic(music));
+  }
 
   return (
     <div className="MobileHome">
@@ -38,9 +46,14 @@ export default function MobileHome() {
             {popularData.map((data, index) => {
               return (
                 <li key={index}>
-                  <span className="song-span">{data.song}</span>
-                  <span className="artist-span">{data.artist}</span>
-                  <button>
+                  <button onClick={(e) => setMusic(data)}>
+                    <span className="song-span">{data.song}</span>
+                    <span className="artist-span">{data.artist}</span>
+                  </button>
+                  <button
+                    className="options-btn"
+                    onClick={(e) => console.log("...")}
+                  >
                     <FontAwesomeIcon icon={faEllipsis} />
                   </button>
                 </li>
@@ -57,7 +70,7 @@ export default function MobileHome() {
             <div className="carousel-controls">
               <button
                 onClick={() => {
-                  updateIndex(activeIndex - 1);
+                  updateCarouselIndex(activeIndex - 1);
                 }}
                 disabled={activeIndex === 0}
               >
@@ -65,7 +78,7 @@ export default function MobileHome() {
               </button>
               <button
                 onClick={() => {
-                  updateIndex(activeIndex + 1);
+                  updateCarouselIndex(activeIndex + 1);
                 }}
                 disabled={activeIndex === dataLength / 2 - 1}
               >
@@ -81,18 +94,24 @@ export default function MobileHome() {
               {popularData.map((data, index) => {
                 return (
                   <div key={index} className="mobilehome-carousel-item">
-                    <div className="img-container">
-                      <img
-                        src={data.photo_240}
-                        alt={data.title}
-                        className="img-fluid"
-                      />
-                      <div className="img-container-hover">
-                        <div className="hover-icon">
-                          <FontAwesomeIcon icon={faPlay} />
+                    <button
+                      onClick={(e) => {
+                        setMusic(data);
+                      }}
+                    >
+                      <div className="img-container">
+                        <img
+                          src={data.thumbnail}
+                          alt={data.title}
+                          className="img-fluid"
+                        />
+                        <div className="img-container-hover">
+                          <div className="hover-icon">
+                            <FontAwesomeIcon icon={faPlay} />
+                          </div>
                         </div>
                       </div>
-                    </div>
+                    </button>
                     <div className="item-texts">
                       <span className="title-text">{data.song}</span>
                       <span className="artist-text">{data.artist}</span>
@@ -113,19 +132,26 @@ export default function MobileHome() {
           <div className="popular-albums-items-container">
             {popularData.map((data, index) => {
               return (
-                <div key={index} className="popular-albums-item col-6">
-                  <div className="img-container">
-                    <img
-                      src={data.photo_240}
-                      alt={data.title}
-                      className="img-fluid"
-                    />
-                    <div className="img-container-hover">
-                      <div className="hover-icon">
-                        <FontAwesomeIcon icon={faPlay} />
+                <div key={index} className="popular-albums-item">
+                  <button
+                    onClick={(e) => {
+                      setMusic(data);
+                    }}
+                  >
+                    <div className="img-container">
+                      <img
+                        src={data.thumbnail}
+                        alt={data.title}
+                        className="img-fluid"
+                      />
+                      <div className="img-container-hover">
+                        <div className="hover-icon">
+                          <FontAwesomeIcon icon={faPlay} />
+                        </div>
                       </div>
                     </div>
-                  </div>
+                  </button>
+
                   <div className="item-texts">
                     <span className="title-text">{data.song}</span>
                   </div>
@@ -138,5 +164,3 @@ export default function MobileHome() {
     </div>
   );
 }
-
-// https://medium.com/tinyso/how-to-create-the-responsive-and-swipeable-carousel-slider-component-in-react-99f433364aa0

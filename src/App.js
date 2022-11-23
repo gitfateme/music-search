@@ -19,7 +19,7 @@ export default function App() {
 
   async function getData() {
     const res = await axios.get("http://localhost:3000/trendings");
-    setPopularData(res.data.slice(0, 10));
+    setPopularData(res.data);
   }
 
   return width < breakpoint ? (

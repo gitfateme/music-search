@@ -8,6 +8,12 @@ import store from "./app/store";
 import "./css/index.scss";
 import Home from "./Home";
 import Search from "./Search";
+import {
+  TopResults,
+  ArtistsReults,
+  SongsResults,
+  AlbumsResults,
+} from "./ResultsComponent";
 
 const router = createBrowserRouter([
   {
@@ -22,6 +28,24 @@ const router = createBrowserRouter([
       {
         path: "/search",
         element: <Search />,
+        children: [
+          {
+            path: "/search",
+            element: <TopResults />,
+          },
+          {
+            path: "/search/artists",
+            element: <ArtistsReults />,
+          },
+          {
+            path: "/search/songs",
+            element: <SongsResults />,
+          },
+          {
+            path: "/search/albums",
+            element: <AlbumsResults />,
+          },
+        ],
       },
     ],
   },

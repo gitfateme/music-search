@@ -37,6 +37,8 @@
 
 
     li {
+
+
       height: 60px;
       padding: 10px;
       position: relative;
@@ -46,6 +48,9 @@
         background-color: var(--hover);
       }
 
+      button {
+        text-align: start;
+      }
       span {
         display: block;
         @include text-ellipsis;
@@ -59,7 +64,7 @@
         font-size: 13px;
         color: var(--secondary-text);
       }
-      button {
+      .options-btn {
         position: absolute;
         right: 0;
         top: calc(50% - 23px);
@@ -74,12 +79,15 @@
       } 
     }
   }
+  button {
+    background-color: transparent;
+    border: none;
+    color: var(--text);
+  }
 
   .img-container {
     overflow: hidden;
     border-radius: 4px;
-
-    // height: 100%;
     position: relative;
 
 
@@ -90,8 +98,6 @@
      top: 0;
      right: 0;
       transition: all 0.2s ease-out;
-      cursor: pointer;
-
     }
 
     .img-container-hover:hover {
@@ -206,6 +212,8 @@
     h2 {
       max-width: 70%;
     }
+    
+
     .popular-albums-items-container {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
@@ -217,7 +225,6 @@
       height: auto;
 
       .item-texts {
-        
         text-align: center;
         margin-top: 10px;
         span {
@@ -232,3 +239,23 @@
 
   }
 }
+
+@media screen and (max-width: 300px ) {
+.MobileHome {
+  .popular-albums-container {
+    .popular-albums-items-container {
+      grid-template-columns: repeat(1, 1fr);
+    }
+  }
+}
+}
+
+@media screen and (min-width: 650px ) {
+  .MobileHome {
+    .popular-albums-container {
+      .popular-albums-items-container {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+  }
+  }
