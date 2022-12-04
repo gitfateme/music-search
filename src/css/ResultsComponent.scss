@@ -1,0 +1,61 @@
+
+  @mixin text-ellipsis {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
+  
+.mobile-top-results {
+  ul {
+    list-style: none;
+    padding: 0;
+
+
+    li {
+      height: 60px;
+      padding: 10px;
+      position: relative;
+      overflow: hidden;
+      border-radius: 4px;
+      &:hover {
+        background-color: var(--hover);
+      }
+
+      button {
+        text-align: start;
+      }
+      span {
+        display: block;
+        @include text-ellipsis;
+
+      }
+      .song-span {
+        font-size: 15px;
+      }
+
+      .artist-span {
+        font-size: 13px;
+        color: var(--secondary-text);
+      }
+      .options-btn {
+        position: absolute;
+        right: 0;
+        top: calc(50% - 23px);
+        background-color: transparent;
+        color: var(--secondary-text);
+        border: 0;
+        padding: 10px 15px;
+        
+        svg {
+          height: 20px
+        }
+      } 
+    }
+  }
+  button {
+    background-color: transparent;
+    border: none;
+    color: var(--text);
+  }
+
+}

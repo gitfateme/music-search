@@ -9,7 +9,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { useOutletContext } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { setCurrentMusic } from "./app/musicSlice";
+import { setCurrentMusic, setRelatedPlaylist } from "./app/musicSlice";
 
 export default function MobileHome() {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -30,6 +30,7 @@ export default function MobileHome() {
 
   function setMusic(music) {
     dispatch(setCurrentMusic(music));
+    dispatch(setRelatedPlaylist(music));
   }
 
   return (
@@ -122,7 +123,7 @@ export default function MobileHome() {
             </div>
           </div>
         </div>
-        <div className="popular-albums-container mt-4 ">
+        <div className="popular-albums-container mt-4">
           <div className="heading-2 d-flex">
             <h2>Popular Albums</h2>
             <span className="h2-icon">

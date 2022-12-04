@@ -36,6 +36,7 @@ function useAudioPlayer() {
   }, [setClickedTime, clickedTime, curTime, playing, vol]);
   return {
     curTime,
+    setCurTime,
     duration,
     playing,
     setPlaying,

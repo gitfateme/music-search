@@ -8,17 +8,30 @@ import {
   faForwardStep,
   faBackwardStep,
 } from "@fortawesome/free-solid-svg-icons";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import useAudioPlayer from "./useAudioPlayer";
+import { goNext, goPrev } from "./app/musicSlice";
 
 export default function MobileControls() {
-  const { curTime, duration, playing, setPlaying, setClickedTime } =
+  const { curTime, setCurTime, duration, playing, setPlaying, setClickedTime } =
     useAudioPlayer();
 
-  const music = useSelector((state) => state.music.data);
+  const dispatch = useDispatch();
+  const currentIndex = useSelector((state) => state.music.currentIndex);
+  const music = useSelector(
+    (state) => state.music.relatedPlaylist[currentIndex]
+  );
+
   const audioRef = useRef();
 
   const curPercentage = (curTime / duration) * 100;
+
+  useEffect(() => {
+    if (curPercentage >= 100) {
+      setPlaying(false);
+      setCurTime(0);
+    }
+  }, [curPercentage, setPlaying, setCurTime]);
 
   useEffect(() => {
     setPlaying(true);
@@ -61,7 +74,7 @@ export default function MobileControls() {
   return (
     <div className="MobileControls">
       <audio id="audio" ref={audioRef}>
-        <source src={music.lq_link} />
+        <source src={music ? music.lq_link : null} />
         Your browser does not support the <code>audio</code> element.
       </audio>
       <div className="bar-row">
@@ -85,18 +98,22 @@ export default function MobileControls() {
           </div>
         </div>
         <div className="track-info">
-          <span className="title">{music.song}</span>
-          <span className="artist">{music.artist}</span>
+          <span className="title">{music ? music.song : null}</span>
+          <span className="artist">{music ? music.artist : null}</span>
         </div>
         <div className="playback-controls">
-          <button className="back">
+          <button
+            className="back"
+            onClick={(e) => {
+              dispatch(goPrev());
+            }}
+          >
             <FontAwesomeIcon icon={faBackwardStep} />
           </button>
           {playing ? (
             <button
               className="pause"
               onClick={() => {
-                console.log("pause btn clicked");
                 setPlaying(false);
               }}
             >
@@ -106,7 +123,6 @@ export default function MobileControls() {
             <button
               className="play"
               onClick={() => {
-                console.log("play btn clicked");
                 if (music) {
                   setPlaying(true);
                 }
@@ -116,7 +132,12 @@ export default function MobileControls() {
             </button>
           )}
 
-          <button className="forward">
+          <button
+            className="forward"
+            onClick={(e) => {
+              dispatch(goNext());
+            }}
+          >
             <FontAwesomeIcon icon={faForwardStep} />
           </button>
         </div>
