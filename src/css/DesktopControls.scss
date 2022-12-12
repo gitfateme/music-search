@@ -1,0 +1,83 @@
+.DesktopControls {
+  background-color: var(--background);
+  border-top: 1px solid var(--divider-default);
+  height: 65px;
+  width: 100%;
+  z-index: 4;
+  position: fixed;
+  bottom: 0;
+  padding: 0 15px;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+
+  .main-controls {
+    display: flex;
+    button {
+      background-color: transparent;
+      border: none;
+      color: var(--text);
+
+      &:hover {
+        color: var(--secondary-text);
+      }
+    }
+    .play, .pause {
+      height: 55px;
+      width: 55px;
+      padding: 10px;
+      svg {
+        height: 100%;
+        width: 100%;
+      }
+    }
+
+    .back, .next {
+      height: 30px;
+      width: 30px;
+      padding: 0px 8px;
+      margin-top: 13px;
+      svg {
+        height: 100%;
+        width: 100%;
+      }
+    }
+  }
+
+  .bar {
+    user-select: none;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    margin-left: 20px;
+    max-width: 1000px;
+
+    span {
+      font-size: 13px;
+      color: var(--secondary-text);
+    }
+  }
+
+  .bar-progress {
+    background-color: var(--divider-default);
+    cursor: pointer;
+    flex: 1;
+    height: 5px;
+    margin: 0 10px;
+  }
+
+  .bar-progress-knob {
+    display: block;
+    top: calc(50% - 7px);
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background-color: var(--accent-contrast);
+    position: relative;
+  }
+  .bar-played {
+    background-color: var(--accent-default);
+    height: 5px;
+    margin-top: -14px;
+  }
+}

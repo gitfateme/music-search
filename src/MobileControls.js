@@ -9,6 +9,8 @@ import {
   faBackwardStep,
 } from "@fortawesome/free-solid-svg-icons";
 import { useSelector, useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
+
 import useAudioPlayer from "./useAudioPlayer";
 import { goNext, goPrev } from "./app/musicSlice";
 
@@ -94,7 +96,9 @@ export default function MobileControls() {
       <div className="controls-row">
         <div className="expand-container">
           <div className="expand-icon">
-            <FontAwesomeIcon icon={faChevronUp} />
+            <Link to={music ? `/musics/${music.permlink}/${music.id}` : ""}>
+              <FontAwesomeIcon icon={faChevronUp} />
+            </Link>
           </div>
         </div>
         <div className="track-info">

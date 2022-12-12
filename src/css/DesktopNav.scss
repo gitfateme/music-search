@@ -1,0 +1,97 @@
+.DesktopNav {
+  background-color: var(--background);
+  width: 220px;
+  height: calc(100vh - 65px);
+  z-index: 3;
+  position: fixed;
+  top: 0;
+  right: 0;
+  overflow:auto;
+
+  .nav-menu {
+    padding: 15px 0;
+
+  }
+  .current-track {
+    height: 65px;
+    width: 100%;
+    position: fixed;
+    bottom: 65px;
+    padding: 5px;
+    border-top: 1px solid var(--divider-lighter);
+  }
+
+  .logo {
+    text-align: center;
+    font-size: 26px;
+
+    a{ 
+      text-decoration: none;
+      color: var(--secondary-text);
+    }
+  }
+
+  .search-form {
+    padding: 0px 18px;
+    margin: 15px 0;
+    position: relative;
+
+    input {
+      background-color: var(--chip);
+      padding: 0 10px 0 40px;
+      border: 1px solid var(--divider-default);
+      height: 38px;
+      width: 100%;
+      overflow: hidden;
+      color: var(--text);
+      font-size: 13px;
+      border-radius: 3px;
+      direction: rtl;
+      &:focus {
+        border: 2px solid var(--accent-lighter);
+        outline: none;
+      }
+    }
+
+    button {
+      color: var(--text);
+      border: none;
+      position: absolute;
+      left: 22px;
+      top: 4px;
+      background-color: transparent;
+      font-size: 20px;
+    }
+  }
+  
+  .nav-item {
+    direction: rtl;
+    color: var(--text);
+    padding: 8px 10px;
+    margin: 0 8px;
+    border-left: 3px solid transparent;
+    border-radius: 4px;
+
+    span {
+      padding-right: 10px;
+    }
+
+    &:hover {
+      background-color: var(--divider-lighter);
+    }
+
+    &.active {
+      background-color: var(--accent-emphasis);
+      border-left: 3px solid var(--accent-default);
+
+      &:hover {
+        background-color: var(--divider-lighter);
+      }
+    }
+  }
+
+  hr {
+    color: var(--secondary-text);
+    margin: 20px 20px;
+  }
+}

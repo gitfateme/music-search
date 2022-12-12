@@ -1,5 +1,5 @@
 import React from "react";
-import DesktopHome from "./DesktopHome";
+import DesktopHome from "./DesktopApp";
 import MobileSearch from "./MobileSearch";
 import useViewport from "./useViewPort";
 

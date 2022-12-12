@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./css/MobileHome.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -7,13 +7,43 @@ import {
   faEllipsis,
   faPlay,
 } from "@fortawesome/free-solid-svg-icons";
-import { useOutletContext } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setCurrentMusic, setRelatedPlaylist } from "./app/musicSlice";
+import axios from "axios";
+import useViewport from "./useViewPort";
 
 export default function MobileHome() {
+  const { width } = useViewport();
+
   const [activeIndex, setActiveIndex] = useState(0);
-  const popularData = useOutletContext();
+  const [popularData, setPopularData] = useState([]);
+  const [itemsPerPage, setItemsPerPage] = useState(0);
+
+  useEffect(() => {
+    if (width > 1200) {
+      setItemsPerPage(5);
+    } else if (width > 992) {
+      setItemsPerPage(4);
+    } else if (width > 576) {
+      setItemsPerPage(3);
+    } else if (width < 576) {
+      setItemsPerPage(2);
+    }
+    console.log(itemsPerPage);
+  }, [width, itemsPerPage]);
+
+  useEffect(() => {
+    getData();
+  }, []);
+
+  useEffect(() => {
+    console.log(popularData);
+  }, [popularData]);
+
+  async function getData() {
+    const res = await axios.get("http://localhost:3000/trendings");
+    setPopularData(res.data);
+  }
 
   const dispatch = useDispatch();
   const dataLength = popularData.length;
@@ -34,9 +64,14 @@ export default function MobileHome() {
   }
 
   return (
-    <div className="MobileHome">
-      <div className="mobile-home-container">
-        <div className="popular-tracks-container">
+    <div
+      className="MobileHome"
+      style={{
+        height: width > 700 ? "calc(100vh - 65px)" : "calc(100vh - 140px)",
+      }}
+    >
+      <div className="mobile-home-container container-md">
+        <div className="popular-tracks-container ">
           <div className="heading-2 d-flex">
             <h2>Popular Tracks</h2>
             <span className="h2-icon">
@@ -81,7 +116,7 @@ export default function MobileHome() {
                 onClick={() => {
                   updateCarouselIndex(activeIndex + 1);
                 }}
-                disabled={activeIndex === dataLength / 2 - 1}
+                disabled={activeIndex >= dataLength / itemsPerPage - 1}
               >
                 <FontAwesomeIcon icon={faChevronRight} />
               </button>

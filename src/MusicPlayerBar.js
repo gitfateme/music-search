@@ -2,7 +2,6 @@ import React, { useEffect, useRef } from "react";
 import "./css/MusicPlayerBar.scss";
 import { useSelector } from "react-redux";
 import useAudioPlayer from "./useAudioPlayer";
-
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faPlay,

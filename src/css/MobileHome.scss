@@ -7,6 +7,9 @@
   
 .MobileHome {
 
+  
+  overflow-y: scroll;
+
   .mobile-home-container {
     padding: 30px;
   }
@@ -247,8 +250,16 @@
 }
 }
 
-@media screen and (min-width: 650px ) {
+@media screen and (min-width: 576px ) {
   .MobileHome {
+
+    .mobilehome-carousel {
+      .mobilehome-carousel-inner {
+        .mobilehome-carousel-item {
+          width: 33.33%;
+        }
+      }
+    }
     .popular-albums-container {
       .popular-albums-items-container {
         grid-template-columns: repeat(3, 1fr);
@@ -256,3 +267,37 @@
     }
   }
   }
+
+  @media screen and (min-width: 992px ) {
+    .MobileHome {
+      .mobilehome-carousel {
+        .mobilehome-carousel-inner {
+          .mobilehome-carousel-item {
+            width: 25%;
+          }
+        }
+      }
+      .popular-albums-container {
+        .popular-albums-items-container {
+          grid-template-columns: repeat(4, 1fr);
+        }
+      }
+    }
+    }
+
+    @media screen and (min-width: 1200px ) {
+      .MobileHome {
+        .mobilehome-carousel {
+          .mobilehome-carousel-inner {
+            .mobilehome-carousel-item {
+              width: 20%;
+            }
+          }
+        }
+        .popular-albums-container {
+          .popular-albums-items-container {
+            grid-template-columns: repeat(5, 1fr);
+          }
+        }
+      }
+      }

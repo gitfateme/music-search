@@ -1,7 +1,7 @@
 import "./css/MusicComponent.scss";
-import React, { useEffect } from "react";
+import React from "react";
 import { useDispatch } from "react-redux";
-import { setCurrentMusic } from "./app/musicSlice";
+import { setCurrentMusic, setRelatedPlaylist } from "./app/musicSlice";
 import Trending from "./Trending";
 
 export default function MusicComponent({ music }) {
@@ -9,13 +9,10 @@ export default function MusicComponent({ music }) {
 
   console.log(music);
 
-  useEffect(() => {
-    document.title = `${music.artist} - ${music.song} - GoozAhang.com`;
-  });
-
   function handleClick(e) {
     e.preventDefault();
     dispatch(setCurrentMusic(music));
+    dispatch(setRelatedPlaylist(music));
   }
   return (
     <div className="MusicComponent">

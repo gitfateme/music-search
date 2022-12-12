@@ -14,6 +14,7 @@ import {
   SongsResults,
   AlbumsResults,
 } from "./ResultsComponent";
+import MusicPage from "./MusicPage";
 
 const router = createBrowserRouter([
   {
@@ -24,6 +25,10 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Home />,
+      },
+      {
+        path: "/musics/:permLink/:musicId",
+        element: <MusicPage />,
       },
       {
         path: "/search",

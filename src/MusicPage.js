@@ -3,8 +3,6 @@ import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./css/MusicPage.scss";
 import MusicComponent from "./MusicComponent";
-import Header from "./Header";
-import Footer from "./Footer";
 
 export default function MusicPage() {
   const [music, setMusic] = useState([]);
@@ -13,6 +11,10 @@ export default function MusicPage() {
 
   const navigate = useNavigate();
   const { musicId } = useParams();
+
+  useEffect(() => {
+    document.title = `${music.artist} - ${music.song} - Goozic.com`;
+  });
 
   useEffect(() => {
     async function getMusic() {
@@ -40,9 +42,7 @@ export default function MusicPage() {
   } else {
     return (
       <div className="MusicPage d-flex flex-column ">
-        <Header />
         <MusicComponent music={music} />
-        <Footer />
       </div>
     );
   }
