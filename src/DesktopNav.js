@@ -3,7 +3,7 @@ import "./css/DesktopNav.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faMusic,
-  faWind,
+  faCat,
   faMagnifyingGlass,
   faHome,
 } from "@fortawesome/free-solid-svg-icons";
@@ -11,16 +11,19 @@ import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 export default function DesktopNav() {
-  const music = useSelector((state) => state.music.data);
-  console.log(music.title);
+  const currentIndex = useSelector((state) => state.music.currentIndex);
+  const music = useSelector(
+    (state) => state.music.relatedPlaylist[currentIndex]
+  );
+
   return (
     <div className="DesktopNav">
       <div className="nav-menu">
         <div className="logo">
           <Link to={"/"}>
+            <FontAwesomeIcon icon={faCat} />
             <FontAwesomeIcon icon={faMusic} />
-            <FontAwesomeIcon icon={faWind} />
-            <span> Goozic</span>
+            <span> Miusic</span>
           </Link>
         </div>
         <form className="search-form">
@@ -38,13 +41,13 @@ export default function DesktopNav() {
         <Link to={"/"} style={{ textDecoration: "none" }}>
           <div className="nav-item">
             <FontAwesomeIcon icon={faMusic} />
-            <span>خانه</span>
+            <span>جدید ترین ها</span>
           </div>
         </Link>
         <Link to={"/"} style={{ textDecoration: "none" }}>
           <div className="nav-item">
-            <FontAwesomeIcon icon={faWind} />
-            <span>خانه</span>
+            <FontAwesomeIcon icon={faCat} />
+            <span>محبوب ترین ها</span>
           </div>
         </Link>
         <hr />
@@ -53,7 +56,19 @@ export default function DesktopNav() {
           <button className="btn btn-secondary disabled">ورود </button>
         </div>
       </div>
-      <div className={`current-track ${music ? "" : "d-none"}`}></div>
+      {music === undefined ? (
+        <div className="current-track d-none"></div>
+      ) : (
+        <div className="current-track">
+          <Link to={music ? `/musics/${music.permlink}/${music.id}` : ""}>
+            <img src={music.thumbnail} alt={music.song} />
+          </Link>
+          <div className="track-info">
+            <span className="track-title">{music.title}</span>
+            <span className="track-artist">{music.artist}</span>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

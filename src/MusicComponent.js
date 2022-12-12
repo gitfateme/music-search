@@ -18,7 +18,7 @@ export default function MusicComponent({ music }) {
     <div className="MusicComponent">
       <div className="container text-center">
         <div className="row">
-          <div className="col-12 col-md-6 music-info">
+          <div className="col-12 col-xl-6 order-xl-2 music-info">
             <h1 className="mb-3">
               {music.artist} - {music.song}
             </h1>
@@ -37,7 +37,7 @@ export default function MusicComponent({ music }) {
               >
                 دانلود
               </a>
-              <button onClick={handleClick} className="btn btn-danger">
+              <button onClick={handleClick} className="btn btn-success">
                 پخش آهنگ
               </button>
             </div>
@@ -61,8 +61,8 @@ export default function MusicComponent({ music }) {
             </p>
             <hr />
           </div>
-          <div className="col-12 col-md-6">
-            <Trending />
+          <div className="col-12 col-xl-4">
+            <Trending related={JSON.parse(music.related)} />
           </div>
         </div>
       </div>

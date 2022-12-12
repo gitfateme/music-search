@@ -13,7 +13,7 @@ export default function MusicPage() {
   const { musicId } = useParams();
 
   useEffect(() => {
-    document.title = `${music.artist} - ${music.song} - Goozic.com`;
+    document.title = `${music.artist} - ${music.song} - Meowzic.com`;
   });
 
   useEffect(() => {

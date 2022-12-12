@@ -73,7 +73,7 @@ export function TopResults() {
       </section>
     </div>
   ) : (
-    <>gooz</>
+    <>test</>
   );
 }
 
@@ -105,7 +105,7 @@ export function ArtistsReults() {
       </section>
     </div>
   ) : (
-    <>gooz</>
+    <>test</>
   );
 }
 
@@ -139,7 +139,7 @@ export function SongsResults() {
       </section>
     </div>
   ) : (
-    <>gooz</>
+    <>test</>
   );
 }
 
@@ -170,6 +170,6 @@ export function AlbumsResults() {
       </section>
     </div>
   ) : (
-    <>gooz</>
+    <>test</>
   );
 }

@@ -8,15 +8,30 @@ import {
   faBackwardStep,
 } from "@fortawesome/free-solid-svg-icons";
 import useAudioPlayer from "./useAudioPlayer";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { goNext, goPrev } from "./app/musicSlice";
 
 export default function DesktopControls() {
-  const { playing, setPlaying, curTime, duration, setClickedTime } =
+  const dispatch = useDispatch();
+
+  const { playing, setPlaying, curTime, duration, setClickedTime, setCurTime } =
     useAudioPlayer();
-  const music = useSelector((state) => state.music.data);
+
+  const currentIndex = useSelector((state) => state.music.currentIndex);
+  const music = useSelector(
+    (state) => state.music.relatedPlaylist[currentIndex]
+  );
+
   const audioRef = useRef();
 
   const curPercentage = (curTime / duration) * 100;
+
+  useEffect(() => {
+    if (curPercentage >= 100) {
+      setPlaying(false);
+      setCurTime(0);
+    }
+  }, [curPercentage, setPlaying, setCurTime]);
 
   useEffect(() => {
     setPlaying(true);
@@ -78,10 +93,10 @@ export default function DesktopControls() {
     <div className="DesktopControls">
       <div className="main-controls">
         <audio id="audio" ref={audioRef}>
-          <source src={music.lq_link} />
+          <source src={music ? music.lq_link : null} />
           Your browser does not support the <code>audio</code> element.
         </audio>
-        <button className="back">
+        <button className="back" onClick={(e) => dispatch(goPrev())}>
           <FontAwesomeIcon icon={faBackwardStep} />
         </button>
         {playing ? (
@@ -105,7 +120,7 @@ export default function DesktopControls() {
             <FontAwesomeIcon icon={faPlay} />
           </button>
         )}
-        <button className="next">
+        <button className="next" onClick={(e) => dispatch(goNext())}>
           <FontAwesomeIcon icon={faForwardStep} />
         </button>
       </div>

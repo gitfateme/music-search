@@ -52,11 +52,9 @@ export default function MobileSearch() {
         </div>
         <div className="search-empty-texts">
           <span className="empty-top-span">
-            {error ? "No results" : "Search Goozic"}
+            {error ? "No results" : "Search Miusic"}
           </span>
-          <span className="empty-bot-span">
-            Find goozoos, algooz, goozics, and more chos.
-          </span>
+          <span className="empty-bot-span">Find musics, lyrics and more .</span>
         </div>
       </div>
       <div className={`search-results-container ${result ? "" : "d-none"}`}>
