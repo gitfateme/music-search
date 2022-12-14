@@ -7,8 +7,6 @@ import Trending from "./Trending";
 export default function MusicComponent({ music }) {
   const dispatch = useDispatch();
 
-  console.log(music);
-
   function handleClick(e) {
     e.preventDefault();
     dispatch(setCurrentMusic(music));

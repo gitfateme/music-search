@@ -33,7 +33,7 @@ export default function DesktopNav() {
           </button>
         </form>
         <Link to={"/"} style={{ textDecoration: "none" }}>
-          <div className="nav-item active">
+          <div className="nav-item ">
             <FontAwesomeIcon icon={faHome} />
             <span>خانه</span>
           </div>
@@ -64,7 +64,7 @@ export default function DesktopNav() {
             <img src={music.thumbnail} alt={music.song} />
           </Link>
           <div className="track-info">
-            <span className="track-title">{music.title}</span>
+            <span className="track-title">{music.song}</span>
             <span className="track-artist">{music.artist}</span>
           </div>
         </div>

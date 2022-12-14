@@ -5,9 +5,7 @@
     overflow: hidden;
   }
   
-.MobileHome {
-
-  
+.Home {
   overflow-y: scroll;
 
   .mobile-home-container {
@@ -33,52 +31,6 @@
     }
   }
 
-  ul {
-    list-style: none;
-    padding: 0;
-
-
-    li {
-      height: 60px;
-      padding: 10px;
-      position: relative;
-      overflow: hidden;
-      border-radius: 4px;
-      &:hover {
-        background-color: var(--hover);
-      }
-
-      button {
-        text-align: start;
-      }
-      span {
-        display: block;
-        @include text-ellipsis;
-
-      }
-      .song-span {
-        font-size: 15px;
-      }
-
-      .artist-span {
-        font-size: 13px;
-        color: var(--secondary-text);
-      }
-      .options-btn {
-        position: absolute;
-        right: 0;
-        top: calc(50% - 23px);
-        background-color: transparent;
-        color: var(--secondary-text);
-        border: 0;
-        padding: 10px 15px;
-        
-        svg {
-          height: 20px
-        }
-      } 
-    }
-  }
   button {
     background-color: transparent;
     border: none;
@@ -140,6 +92,7 @@
   .heading-2 {
     position: relative;
     display: block;
+    margin-bottom: 10px;
 
     h2 {
       max-width: 60%;
@@ -241,7 +194,7 @@
 }
 
 @media screen and (max-width: 300px ) {
-.MobileHome {
+.Home {
   .popular-albums-container {
     .popular-albums-items-container {
       grid-template-columns: repeat(1, 1fr);
@@ -251,7 +204,7 @@
 }
 
 @media screen and (min-width: 576px ) {
-  .MobileHome {
+  .Home {
 
     .mobilehome-carousel {
       .mobilehome-carousel-inner {
@@ -269,7 +222,7 @@
   }
 
   @media screen and (min-width: 992px ) {
-    .MobileHome {
+    .Home {
       .mobilehome-carousel {
         .mobilehome-carousel-inner {
           .mobilehome-carousel-item {
@@ -286,7 +239,7 @@
     }
 
     @media screen and (min-width: 1200px ) {
-      .MobileHome {
+      .Home {
         .mobilehome-carousel {
           .mobilehome-carousel-inner {
             .mobilehome-carousel-item {

@@ -1,0 +1,161 @@
+
+  @mixin text-ellipsis {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
+
+.ItemsList-mobile {
+  button {
+    background-color: transparent;
+    border: none;
+    color: var(--text);
+  }
+  ul {
+    list-style: none;
+    padding: 0;
+    li {
+      height: 60px;
+      padding: 10px 10px 10px 0;
+      position: relative;
+      overflow: hidden;
+      border-radius: 4px;
+      &:hover {
+        background-color: var(--hover);
+      }
+      button {
+        text-align: start;
+        padding: 0;
+      }
+      .main-btn {
+        width: 100%;
+      }
+      span {
+        display: block;
+        @include text-ellipsis;
+        width: calc(100% - 35px);
+      }
+      .song-span {
+        font-size: 15px;
+      }
+      .artist-span {
+        font-size: 13px;
+        color: var(--secondary-text);
+      }
+      .options-btn {
+        position: absolute;
+        right: 0;
+        top: calc(50% - 23px);
+        background-color: transparent;
+        color: var(--secondary-text);
+        border: 0;
+        padding: 10px 15px;
+        display: block;
+        svg {
+          height: 20px
+        }
+      } 
+    }
+  }
+}
+.ItemsList-desktop {
+  button {
+    background-color: transparent;
+    border: none;
+    color: var(--text);
+  }
+  table {
+    width: 100%;
+    table-layout: fixed;
+  }
+  tr {
+    border-bottom: 1px solid var(--divider-default);
+    height: 52px;
+  }
+  th {
+    font-weight: 100;
+    color: var(--secondary-text);
+  }
+  td {
+    font-size: 14px;
+  }
+  .number-column {
+    padding-left: 24px;
+    width: 70px;  
+  }
+  .play-btn {
+    display: none;
+    width: 40px;
+    height: 40px;
+    margin-right: 20px;
+    svg {
+      height: 100%;
+      width: 100%;
+    }
+  }
+  .title-column {
+    img {
+      width: 35px;
+      height: 35px;
+      border-radius: 4px;
+      margin-right: 10px;
+      margin-top: -10px;
+    }
+
+    span {
+      width: calc(100% - 45px);
+      margin-top: 10px;
+    }
+  }
+  .options-column {
+    width: 65px;
+    button {
+      font-size: 20px;
+      padding: 0 15px;
+      opacity: 0;
+    }
+  }
+  .artist-column {
+   span {
+      @include text-ellipsis;
+      width: 100%;
+    }
+  }
+  .like-column {
+    display: none;
+    width: 70px;  
+    padding-right: 10px;
+    button {
+      width: 40px;
+      height: 40px;
+      text-align: center;
+    }
+  }
+  .duration-column {
+    width: 70px;  
+    padding-right: 24px;
+  }
+  .title-column , .artist-column {
+    span {
+      @include text-ellipsis;
+      display: inline-block;
+    }
+  }
+
+  tr:hover {
+    background-color: var(--hover);
+    .options-column {
+      button {
+        opacity: 1;
+      }
+    }
+    .number-span {
+      display: none;
+    }
+
+    .play-btn {
+      display: block;
+      margin-left: -10px;
+    }
+  }
+}

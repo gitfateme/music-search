@@ -1,16 +1,17 @@
 .DesktopNav {
   background-color: var(--background);
   width: 220px;
-  height: calc(100vh - 65px);
   z-index: 3;
   position: fixed;
   top: 0;
   right: 0;
-  overflow:auto;
+
 
   .nav-menu {
     padding: 15px 0;
-
+    margin-bottom: 65px;
+    height: calc(100vh - 130px);
+    overflow:auto;
   }
   .current-track {
     height: 65px;

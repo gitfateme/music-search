@@ -1,17 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { useDispatch } from "react-redux";
 import "./css/Trending.scss";
 import axios from "axios";
 import { setCurrentMusic, setRelatedPlaylist } from "./app/musicSlice";
 
 export default function Trending({ related }) {
-  const [data, setData] = useState([]);
-
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    getData();
-  }, []);
 
   async function setMusic(music) {
     await axios
@@ -26,11 +20,6 @@ export default function Trending({ related }) {
       });
   }
 
-  async function getData() {
-    const res = await axios.get("http://localhost:3000/trendings");
-    setData(res.data);
-    // console.log(res);
-  }
   return (
     <div className="Trending">
       <div className="container">
