@@ -1,27 +1,30 @@
 .DesktopNav {
-  background-color: var(--background);
-  width: 220px;
-  z-index: 3;
-  position: fixed;
-  top: 0;
-  right: 0;
-
 
   .nav-menu {
+    z-index: 3;
+    background-color: var(--background);
     padding: 15px 0;
+    padding-bottom: 65px;
     margin-bottom: 65px;
-    height: calc(100vh - 130px);
+    height: calc(100vh - 65px);
     overflow:auto;
+    width: 220px;
+    position: fixed;
+    top: 0;
+    right: 0;
   }
   .current-track {
+    background-color: var(--background);
     height: 65px;
-    width: 100%;
+    width: 220px;
     position: fixed;
+    right: 0;
     bottom: 65px;
     padding: 5px;
     border-top: 1px solid var(--divider-lighter);
     display: flex;
     align-items: center;
+    z-index: 3;
 
     img {
       width: 55px;
@@ -125,5 +128,74 @@
     margin: 20px 20px;
   }
 
-  
+  .results-background {
+    background-color: var(--backdrop);
+    opacity: .6;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    right: 220px;
+    z-index: 3;
+  }
+  .search-results {
+    background-color: var(--background-alternative);
+    z-index: 3;
+    height: calc(100% - 55px);
+    position: fixed;
+    top: 0;
+    right: 220px;
+    overflow: auto;
+    transition: all 0.5s ease;
+  }
+  .search-results-inner {
+     padding: 20px;
+      h3 {
+        text-align: right;
+        font-size: 18px;
+        color: var(--hint-text);
+        margin: 20px 0 15px;
+      }
+     ul {
+      list-style: none;
+      padding: 0;
+
+      li {
+        button {
+          background-color: var(--raised-button);
+          color: var(--text);
+          border: 1px solid var(--divider-lighter);
+          padding: 7px;
+          margin-bottom: 10px;
+          width: 100%;
+          display: flex;
+          align-items: center;
+          text-overflow: hidden;
+
+          img {
+            width: 55px;
+            height: 55px;
+            border-radius: 4px;
+          }
+
+          .results-names {
+            display: flex;
+            flex-direction: column;
+
+            span {
+              text-align: left;
+              margin-left: 10px;
+              font-size: 14px;
+            }
+            .results-artist {
+              color: var(--secondary-text);
+            }
+          }
+        }
+        button:hover {
+          background-color: #353543;
+        }
+      }
+     }
+  }
 }

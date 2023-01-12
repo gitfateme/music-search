@@ -19,7 +19,8 @@ export default function MusicPage() {
   useEffect(() => {
     async function getMusic() {
       await axios
-        .get(`http://localhost:3000/musics/${musicId}`)
+        // .get(`http://localhost:3000/musics/${musicId}`)
+        .get(`https://www.radiojavan.com/api2/mp3?id=${musicId}`)
         .then((res) => {
           setMusic(res.data);
         })

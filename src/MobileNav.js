@@ -22,7 +22,7 @@ export default function MobileNav() {
             <span className="mobilenav-text">Home</span>
           </div>
         </Link>
-        <div className="mobilenav-item">
+        <div className="mobilenav-item  mobilenav-disabled">
           <div className="mobilenav-icon">
             <FontAwesomeIcon icon={faRankingStar} />
           </div>
@@ -36,13 +36,13 @@ export default function MobileNav() {
             <span className="mobilenav-text">Search</span>
           </div>
         </Link>
-        <div className="mobilenav-item">
+        <div className="mobilenav-item  mobilenav-disabled">
           <div className="mobilenav-icon">
             <FontAwesomeIcon icon={faMusic} />
           </div>
           <span className="mobilenav-text">Your Music</span>
         </div>
-        <div className="mobilenav-item">
+        <div className="mobilenav-item  mobilenav-disabled">
           <div className="mobilenav-icon">
             <FontAwesomeIcon icon={faUser} />
           </div>

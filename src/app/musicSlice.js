@@ -14,7 +14,8 @@ export const musicSlice = createSlice({
       state.currentIndex = 0;
     },
     setRelatedPlaylist(state, action) {
-      const related = JSON.parse(action.payload.related);
+      // const related = JSON.parse(action.payload.related);
+      const related = action.payload.related;
       state.relatedPlaylist = [action.payload, ...related];
       console.log(state.relatedPlaylist);
     },

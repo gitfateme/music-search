@@ -13,14 +13,19 @@ export default function MobileSearch() {
   const navigate = useNavigate();
 
   async function getMusic() {
-    const res = await axios.get("http://localhost:3000/musics", {
-      params: {
-        searchKeyword: keyword,
-      },
-    });
-    console.log(res);
-    setError(null);
-    setResult(res.data);
+    // const res = await axios.get("http://localhost:3000/musics", {
+    //   params: {
+    //     searchKeyword: keyword,
+    //   },
+    // });
+    // console.log(res);
+    // setError(null);
+    // setResult(res.data);
+    const res = await axios.get(
+      `https://www.radiojavan.com/api2/search?query=${keyword}`
+    );
+    console.log(res.data.top);
+    setResult(res.data.mp3s);
   }
 
   function handleSubmit(e) {

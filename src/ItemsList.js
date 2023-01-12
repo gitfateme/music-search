@@ -6,6 +6,7 @@ import { faClock, faHeart } from "@fortawesome/free-regular-svg-icons";
 import { useDispatch } from "react-redux";
 import { setCurrentMusic, setRelatedPlaylist } from "./app/musicSlice";
 import useViewport from "./useViewPort";
+import axios from "axios";
 
 export default function ItemsList({ data }) {
   const { width } = useViewport();
@@ -13,9 +14,16 @@ export default function ItemsList({ data }) {
 
   const dispatch = useDispatch();
 
-  function setMusic(music) {
-    dispatch(setCurrentMusic(music));
-    dispatch(setRelatedPlaylist(music));
+  async function setMusic(music) {
+    await axios
+      .get(`https://www.radiojavan.com/api2/mp3?id=${music.id}`)
+      .then((r) => {
+        console.log(r.data.song);
+        dispatch(setCurrentMusic(r.data));
+        dispatch(setRelatedPlaylist(r.data));
+      });
+    // dispatch(setCurrentMusic(music));
+    // dispatch(setRelatedPlaylist(music));
   }
   function formatDuration(duration) {
     let time = Math.ceil(duration);

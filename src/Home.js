@@ -40,8 +40,18 @@ export default function Home() {
   }, [popularData]);
 
   async function getData() {
-    const res = await axios.get("http://localhost:3000/trendings");
-    setPopularData(res.data);
+    // const res = await axios.get("http://localhost:3000/trendings");
+    // setPopularData(res.data);
+    // console.log(
+    //   await axios
+    //     .get("https://www.radiojavan.com/api2/browse_items?v2")
+    //     .then((r) => console.log(r.data.sections[2].items))
+    //     .catch((e) => console.log(e))
+    // );
+    const res = await axios.get(
+      "https://www.radiojavan.com/api2/browse_items?"
+    );
+    setPopularData(res.data.sections[2].items);
   }
 
   const dispatch = useDispatch();
@@ -57,9 +67,17 @@ export default function Home() {
     setActiveIndex(newIndex);
   };
 
-  function setMusic(music) {
-    dispatch(setCurrentMusic(music));
-    dispatch(setRelatedPlaylist(music));
+  async function setMusic(music) {
+    await axios
+      .get(`https://www.radiojavan.com/api2/mp3?id=${music.id}`)
+      .then((r) => {
+        console.log(r.data.song);
+        dispatch(setCurrentMusic(r.data));
+        dispatch(setRelatedPlaylist(r.data));
+      });
+
+    // dispatch(setCurrentMusic(music));
+    // dispatch(setRelatedPlaylist(music));
   }
 
   return (

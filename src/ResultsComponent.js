@@ -6,12 +6,21 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEllipsis } from "@fortawesome/free-solid-svg-icons";
 import { useDispatch } from "react-redux";
 import { setCurrentMusic, setRelatedPlaylist } from "./app/musicSlice";
+import axios from "axios";
 
 export function TopResults() {
   const dispatch = useDispatch();
-  function setMusic(music) {
-    dispatch(setCurrentMusic(music));
-    dispatch(setRelatedPlaylist(music));
+  async function setMusic(music) {
+    await axios
+      .get(`https://www.radiojavan.com/api2/mp3?id=${music.id}`)
+      .then((r) => {
+        console.log(r.data.song);
+        dispatch(setCurrentMusic(r.data));
+        dispatch(setRelatedPlaylist(r.data));
+      });
+
+    // dispatch(setCurrentMusic(music));
+    // dispatch(setRelatedPlaylist(music));
   }
 
   // function getHighlightedText(text, highlight) {
