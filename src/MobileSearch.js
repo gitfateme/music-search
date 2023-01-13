@@ -39,6 +39,7 @@ export default function MobileSearch() {
     setSearchedKeyword(keyword);
     navigate("/search");
     getMusic();
+    setLoading(true);
   }
 
   return (
