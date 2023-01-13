@@ -21,18 +21,17 @@ export default function DesktopNav() {
     (state) => state.music.relatedPlaylist[currentIndex]
   );
 
-  async function getMusic() {
-    const res = await axios.get(
-      `https://www.radiojavan.com/api2/search?query=${searchKeyword}`
-    );
-    setResult(res.data.mp3s);
-  }
-
   useEffect(() => {
     console.log(music);
   }, [music]);
 
   useEffect(() => {
+    async function getMusic() {
+      const res = await axios.get(
+        `https://www.radiojavan.com/api2/search?query=${searchKeyword}`
+      );
+      setResult(res.data.mp3s);
+    }
     const delayedSearch = setTimeout(() => {
       if (searchKeyword.length > 2) {
         getMusic();
@@ -44,7 +43,7 @@ export default function DesktopNav() {
     }, 1000);
 
     return () => clearTimeout(delayedSearch);
-  }, [searchKeyword, showResults]);
+  }, [searchKeyword, showResults, result]);
 
   return (
     <div className="DesktopNav">
