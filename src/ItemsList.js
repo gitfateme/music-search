@@ -7,6 +7,7 @@ import { useDispatch } from "react-redux";
 import { setCurrentMusic, setRelatedPlaylist } from "./app/musicSlice";
 import useViewport from "./useViewPort";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 export default function ItemsList({ data }) {
   const { width } = useViewport();
@@ -96,8 +97,10 @@ export default function ItemsList({ data }) {
                   </button>
                 </td>
                 <td className="title-column">
-                  <img src={data.thumbnail} alt={data.song} />
-                  <span>{data.song}</span>
+                  <Link to={`/musics/${data.permlink}/${data.id}`}>
+                    <img src={data.thumbnail} alt={data.song} />
+                    <span>{data.song}</span>
+                  </Link>
                 </td>
                 <td className="options-column">
                   <button>

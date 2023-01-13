@@ -16,7 +16,8 @@ export default function Home() {
   const { width } = useViewport();
 
   const [activeIndex, setActiveIndex] = useState(0);
-  const [popularData, setPopularData] = useState([]);
+  const [trending, setTrending] = useState([]);
+  const [featured, setFeatured] = useState([]);
   const [itemsPerPage, setItemsPerPage] = useState(0);
 
   useEffect(() => {
@@ -36,12 +37,12 @@ export default function Home() {
   }, []);
 
   useEffect(() => {
-    console.log(popularData);
-  }, [popularData]);
+    console.log(trending);
+  }, [trending]);
 
   async function getData() {
     // const res = await axios.get("http://localhost:3000/trendings");
-    // setPopularData(res.data);
+    // setTrending(res.data);
     // console.log(
     //   await axios
     //     .get("https://www.radiojavan.com/api2/browse_items?v2")
@@ -51,11 +52,13 @@ export default function Home() {
     const res = await axios.get(
       "https://www.radiojavan.com/api2/browse_items?"
     );
-    setPopularData(res.data.sections[2].items);
+    setTrending(res.data.sections[2].items);
+    setFeatured(res.data.sections[10].items);
+    console.log(res.data);
   }
 
   const dispatch = useDispatch();
-  const dataLength = popularData.length;
+  const dataLength = trending.length;
 
   const updateCarouselIndex = (newIndex) => {
     if (newIndex < 0) {
@@ -71,7 +74,6 @@ export default function Home() {
     await axios
       .get(`https://www.radiojavan.com/api2/mp3?id=${music.id}`)
       .then((r) => {
-        console.log(r.data.song);
         dispatch(setCurrentMusic(r.data));
         dispatch(setRelatedPlaylist(r.data));
       });
@@ -90,16 +92,16 @@ export default function Home() {
       <div className="mobile-home-container container-md">
         <div className="popular-tracks-container ">
           <div className="heading-2 d-flex">
-            <h2>Popular Tracks</h2>
+            <h2>Trending</h2>
             <span className="h2-icon">
               <FontAwesomeIcon icon={faChevronRight} />
             </span>
           </div>
-          <ItemsList data={popularData} />
+          <ItemsList data={trending.slice(0, 10)} />
         </div>
         <div className="new-releases-container mt-4">
           <div className="heading-2 d-flex">
-            <h2>New Releases</h2>
+            <h2>Trending Musics</h2>
             <span className="h2-icon">
               <FontAwesomeIcon icon={faChevronRight} />
             </span>
@@ -127,7 +129,7 @@ export default function Home() {
               className="mobilehome-carousel-inner"
               style={{ transform: `translateX(-${activeIndex * 100}%)` }}
             >
-              {popularData.map((data, index) => {
+              {trending.map((data, index) => {
                 return (
                   <div key={index} className="mobilehome-carousel-item">
                     <button
@@ -160,13 +162,13 @@ export default function Home() {
         </div>
         <div className="popular-albums-container mt-4">
           <div className="heading-2 d-flex">
-            <h2>Popular Albums</h2>
+            <h2>Featured</h2>
             <span className="h2-icon">
               <FontAwesomeIcon icon={faChevronRight} />
             </span>
           </div>
           <div className="popular-albums-items-container">
-            {popularData.map((data, index) => {
+            {featured.map((data, index) => {
               return (
                 <div key={index} className="popular-albums-item">
                   <button

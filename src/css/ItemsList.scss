@@ -139,6 +139,7 @@
     span {
       @include text-ellipsis;
       display: inline-block;
+      color: var(--text);
     }
   }
 

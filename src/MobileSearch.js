@@ -4,12 +4,14 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
 import { Outlet, useNavigate } from "react-router-dom";
+import LoadingSpinner from "./LoadingSpinner";
 
 export default function MobileSearch() {
   const [keyword, setKeyword] = useState();
   const [searchedKeyword, setSearchedKeyword] = useState();
   const [result, setResult] = useState(null);
   const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
   async function getMusic() {
@@ -24,19 +26,19 @@ export default function MobileSearch() {
     const res = await axios.get(
       `https://www.radiojavan.com/api2/search?query=${keyword}`
     );
-    console.log(res.data.top);
-    setResult(res.data.mp3s);
+    console.log(res.data);
+    if (res.data === {} || res.data.top === []) {
+      setError(true);
+    } else {
+      setResult(res.data.mp3s);
+    }
   }
 
   function handleSubmit(e) {
     e.preventDefault();
     setSearchedKeyword(keyword);
     navigate("/search");
-    getMusic().catch((err) => {
-      console.log(err.response.status);
-      setResult(null);
-      setError(err);
-    });
+    getMusic();
   }
 
   return (
@@ -52,6 +54,7 @@ export default function MobileSearch() {
       <div className={`search-empty ${result ? "d-none" : ""}`}>
         <div className="search-icon-wrapper">
           <div className="search-icon">
+            {loading ? <LoadingSpinner size={"40px"} /> : null}
             <FontAwesomeIcon icon={faMagnifyingGlass} />
           </div>
         </div>

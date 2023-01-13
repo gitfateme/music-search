@@ -9,20 +9,24 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
+import axios from "axios";
 
 export default function DesktopNav() {
   const [searchKeyword, setSearchKeyword] = useState("");
   const [showResults, setShowResults] = useState(false);
+  const [result, setResult] = useState([]);
 
   const currentIndex = useSelector((state) => state.music.currentIndex);
   const music = useSelector(
     (state) => state.music.relatedPlaylist[currentIndex]
   );
 
-  const fakeResults = useSelector((state) => state.music.relatedPlaylist).slice(
-    0,
-    10
-  );
+  async function getMusic() {
+    const res = await axios.get(
+      `https://www.radiojavan.com/api2/search?query=${searchKeyword}`
+    );
+    setResult(res.data.mp3s);
+  }
 
   useEffect(() => {
     console.log(music);
@@ -30,28 +34,26 @@ export default function DesktopNav() {
 
   useEffect(() => {
     const delayedSearch = setTimeout(() => {
-      console.log(searchKeyword);
-    }, 1000);
+      if (searchKeyword.length > 2) {
+        getMusic();
 
-    if (searchKeyword === "ok") {
-      setShowResults(true);
-    }
-    console.log(showResults);
+        if (result) {
+          setShowResults(true);
+        }
+      }
+    }, 1000);
 
     return () => clearTimeout(delayedSearch);
   }, [searchKeyword, showResults]);
 
-  // function toggleResults() {
-  //   setShowResults(!showResults);
-  // }
   return (
     <div className="DesktopNav">
       <div className="nav-menu">
         <div className="logo">
           <Link to={"/"}>
+            <span> میوزیک</span>
             <FontAwesomeIcon icon={faCat} />
             <FontAwesomeIcon icon={faMusic} />
-            <span> Miusic</span>
           </Link>
         </div>
         <form className="search-form">
@@ -84,10 +86,10 @@ export default function DesktopNav() {
           </div>
         </Link>
         <hr />
-        <div className="login-btns text-center">
+        {/* <div className="login-btns text-center">
           <button className="btn btn-secondary disabled me-1">ثبت نام</button>
           <button className="btn btn-secondary disabled">ورود </button>
-        </div>
+        </div> */}
       </div>
       <div className="results-wrapper">
         <div
@@ -105,19 +107,23 @@ export default function DesktopNav() {
           >
             <h3>نتایج جستجو</h3>
             <ul className="results-songs">
-              {fakeResults.map((item, index) => {
-                return (
-                  <li key={index}>
-                    <button>
-                      <img src={item.thumbnail} alt={item.title} />
-                      <div className="results-names">
-                        <span className="results-song">{item.song}</span>
-                        <span className="results-artist">{item.artist}</span>
-                      </div>
-                    </button>
-                  </li>
-                );
-              })}
+              {result
+                ? result.map((item, index) => {
+                    return (
+                      <li key={index}>
+                        <button>
+                          <img src={item.thumbnail} alt={item.title} />
+                          <div className="results-names">
+                            <span className="results-song">{item.song}</span>
+                            <span className="results-artist">
+                              {item.artist}
+                            </span>
+                          </div>
+                        </button>
+                      </li>
+                    );
+                  })
+                : null}
             </ul>
           </div>
         </div>
