@@ -6,6 +6,8 @@ import {
   faPause,
   faForwardStep,
   faBackwardStep,
+  faVolumeHigh,
+  faVolumeMute,
 } from "@fortawesome/free-solid-svg-icons";
 import useAudioPlayer from "./useAudioPlayer";
 import { useSelector, useDispatch } from "react-redux";
@@ -14,8 +16,16 @@ import { goNext, goPrev } from "./app/musicSlice";
 export default function DesktopControls() {
   const dispatch = useDispatch();
 
-  const { playing, setPlaying, curTime, duration, setClickedTime, setCurTime } =
-    useAudioPlayer();
+  const {
+    playing,
+    setPlaying,
+    curTime,
+    duration,
+    setClickedTime,
+    setCurTime,
+    vol,
+    setVol,
+  } = useAudioPlayer();
 
   const currentIndex = useSelector((state) => state.music.currentIndex);
   const music = useSelector(
@@ -25,6 +35,7 @@ export default function DesktopControls() {
   const audioRef = useRef();
 
   const curPercentage = (curTime / duration) * 100;
+  const curVolPercentage = vol * 100;
 
   useEffect(() => {
     if (curPercentage >= 100) {
@@ -35,13 +46,14 @@ export default function DesktopControls() {
 
   useEffect(() => {
     setPlaying(true);
+    setVol(audioRef.current.volume);
 
     if (audioRef.current) {
       audioRef.current.pause();
       audioRef.current.load();
       audioRef.current.play();
     }
-  }, [music, setPlaying]);
+  }, [music, setPlaying, setVol]);
 
   function formatDuration(duration) {
     let time = Math.ceil(duration);
@@ -59,6 +71,35 @@ export default function DesktopControls() {
       return `${hours}:${minutes}:${seconds}`;
     } else {
       return `${minutes}:${seconds}`;
+    }
+  }
+  function setClickedVol(e) {
+    const clickPositionInPage = e.pageX;
+    const volBar = document.querySelector(".vol-bar-progress");
+    const barStart = volBar.getBoundingClientRect().left + window.scrollX;
+    const barWidth = volBar.offsetWidth;
+    const clickPositionInBar = clickPositionInPage - barStart;
+    const volPerPixel = 1 / barWidth;
+    const newVol = volPerPixel * clickPositionInBar;
+    if (newVol < 0.05) {
+      setVol(0);
+    } else if (newVol > 0.95) {
+      setVol(1);
+    } else {
+      setVol(newVol);
+    }
+  }
+  function handleVolDrag(e) {
+    document.addEventListener("mousemove", setClickedVol);
+    document.addEventListener("mouseup", () => {
+      document.removeEventListener("mousemove", setClickedVol);
+    });
+  }
+  function handleVolClcik(e) {
+    if (vol > 0) {
+      setVol(0);
+    } else if (vol === 0) {
+      setVol(0.5);
     }
   }
 
@@ -141,6 +182,25 @@ export default function DesktopControls() {
           ></div>
         </div>
         <span className="bar-time">{formatDuration(duration)}</span>
+      </div>
+      <div className="vol">
+        <div>
+          <button className="vol-btn" onClick={(e) => handleVolClcik()}>
+            {vol === 0 ? (
+              <FontAwesomeIcon icon={faVolumeMute} />
+            ) : (
+              <FontAwesomeIcon icon={faVolumeHigh} />
+            )}
+          </button>
+        </div>
+        <div className="vol-bar" onMouseDown={(e) => handleVolDrag(e)}>
+          <div className="vol-bar-progress">
+            <div
+              className="vol-bar-colored"
+              style={{ width: `${curVolPercentage}%` }}
+            ></div>
+          </div>
+        </div>
       </div>
     </div>
   );

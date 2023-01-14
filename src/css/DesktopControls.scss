@@ -80,4 +80,36 @@
     height: 5px;
     margin-top: -14px;
   }
+
+  .vol {
+    display: flex;
+    align-items: center;
+    margin-left: 20px;
+  }
+
+  .vol-btn {
+    background-color: transparent;
+    border: 0;
+    color: var(--text);
+    margin-top: 2px;
+  }
+  .vol-bar {
+    user-select: none;
+    display: flex;
+    width: 70px;
+  }
+
+  .vol-bar-progress {
+    flex: 1;
+    height: 5px;
+    background-color: var(--divider-default);
+    border-radius: 6px;
+    cursor: pointer;
+  }
+  .vol-bar-colored {
+    width: 100%;
+    height: 100%;
+    border-radius: 6px;
+    background-color: var(--hint-text);
+  }
 }
