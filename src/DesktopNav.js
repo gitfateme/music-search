@@ -22,10 +22,6 @@ export default function DesktopNav() {
   );
 
   useEffect(() => {
-    console.log(music);
-  }, [music]);
-
-  useEffect(() => {
     async function getMusic() {
       const res = await axios.get(
         `https://www.radiojavan.com/api2/search?query=${searchKeyword}`
@@ -72,7 +68,7 @@ export default function DesktopNav() {
             <span>خانه</span>
           </div>
         </Link>
-        <Link to={"/"} style={{ textDecoration: "none" }}>
+        {/* <Link to={"/"} style={{ textDecoration: "none" }}>
           <div className="nav-item">
             <FontAwesomeIcon icon={faMusic} />
             <span>جدید ترین ها</span>
@@ -83,7 +79,7 @@ export default function DesktopNav() {
             <FontAwesomeIcon icon={faCat} />
             <span>محبوب ترین ها</span>
           </div>
-        </Link>
+        </Link> */}
         <hr />
         {/* <div className="login-btns text-center">
           <button className="btn btn-secondary disabled me-1">ثبت نام</button>
@@ -110,7 +106,11 @@ export default function DesktopNav() {
                 ? result.map((item, index) => {
                     return (
                       <li key={index}>
-                        <button>
+                        <Link
+                          to={
+                            music ? `/musics/${item.permlink}/${item.id}` : ""
+                          }
+                        >
                           <img src={item.thumbnail} alt={item.title} />
                           <div className="results-names">
                             <span className="results-song">{item.song}</span>
@@ -118,7 +118,7 @@ export default function DesktopNav() {
                               {item.artist}
                             </span>
                           </div>
-                        </button>
+                        </Link>
                       </li>
                     );
                   })

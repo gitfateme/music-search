@@ -44,21 +44,20 @@ export default function MusicComponent({ music }) {
                 <span className="d-block mb-3">❌حاوی کلمات رکیک❌</span>
               ) : null}
             </span>
-            <p>
-              {music.lyric ? (
-                <span className="d-block my-3"> متن آهنگ</span>
-              ) : null}
-              {music.lyric ? <hr /> : null}
-              {music.lyric
-                ? music.lyric.split("\n").map((string, index) => {
-                    return (
-                      <span key={index}>
-                        {string} <br />
-                      </span>
-                    );
-                  })
-                : null}
-            </p>
+
+            {music.lyric ? (
+              <span className="d-block my-3"> متن آهنگ</span>
+            ) : null}
+            {music.lyric ? <hr /> : null}
+            {music.lyric
+              ? music.lyric.split("\n").map((string, index) => {
+                  return (
+                    <span key={index}>
+                      {string} <br />
+                    </span>
+                  );
+                })
+              : null}
             <hr />
           </div>
           <div className="col-12 col-xl-4">

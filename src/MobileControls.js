@@ -15,7 +15,7 @@ import useAudioPlayer from "./useAudioPlayer";
 import { goNext, goPrev } from "./app/musicSlice";
 
 export default function MobileControls() {
-  const { curTime, setCurTime, duration, playing, setPlaying, setClickedTime } =
+  const { curTime, duration, playing, setPlaying, setClickedTime } =
     useAudioPlayer();
 
   const dispatch = useDispatch();
@@ -30,10 +30,11 @@ export default function MobileControls() {
 
   useEffect(() => {
     if (curPercentage >= 100) {
-      setPlaying(false);
-      setCurTime(0);
+      // setPlaying(false);
+      // setCurTime(0);
+      dispatch(goNext());
     }
-  }, [curPercentage, setPlaying, setCurTime]);
+  }, [curPercentage, dispatch]);
 
   useEffect(() => {
     setPlaying(true);

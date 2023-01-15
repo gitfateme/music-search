@@ -162,7 +162,8 @@
       padding: 0;
 
       li {
-        button {
+        a {
+          text-decoration: none;
           background-color: var(--raised-button);
           color: var(--text);
           border: 1px solid var(--divider-lighter);

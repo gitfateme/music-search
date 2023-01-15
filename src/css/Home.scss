@@ -1,5 +1,5 @@
 
-  @mixin text-ellipsis {
+@mixin text-ellipsis {
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;
@@ -31,9 +31,7 @@
     }
   }
 
-  button {
-    background-color: transparent;
-    border: none;
+  a {
     color: var(--text);
   }
 

@@ -54,16 +54,6 @@ const router = createBrowserRouter([
       },
     ],
   },
-  // {
-  //   path: "/musics/:permLink/:musicId",
-  //   element: <MusicPage />,
-  //   errorElement: <ErrorPage />,
-  // },
-  // {
-  //   path: "/search/",
-  //   element: <SearchPage />,
-  //   errorElement: <ErrorPage />,
-  // },
 ]);
 
 const root = ReactDOM.createRoot(document.getElementById("root"));

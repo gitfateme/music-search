@@ -8,6 +8,9 @@ import {
   faBackwardStep,
   faVolumeHigh,
   faVolumeMute,
+  faList,
+  faShuffle,
+  faRepeat,
 } from "@fortawesome/free-solid-svg-icons";
 import useAudioPlayer from "./useAudioPlayer";
 import { useSelector, useDispatch } from "react-redux";
@@ -22,7 +25,6 @@ export default function DesktopControls() {
     curTime,
     duration,
     setClickedTime,
-    setCurTime,
     vol,
     setVol,
   } = useAudioPlayer();
@@ -39,10 +41,11 @@ export default function DesktopControls() {
 
   useEffect(() => {
     if (curPercentage >= 100) {
-      setPlaying(false);
-      setCurTime(0);
+      // setPlaying(false);
+      // setCurTime(0);
+      dispatch(goNext());
     }
-  }, [curPercentage, setPlaying, setCurTime]);
+  }, [curPercentage, dispatch]);
 
   useEffect(() => {
     setPlaying(true);
@@ -181,7 +184,28 @@ export default function DesktopControls() {
             style={{ width: `${curPercentage}%` }}
           ></div>
         </div>
-        <span className="bar-time">{formatDuration(duration)}</span>
+        <span className="bar-time">
+          {formatDuration(duration) === "NaN:NaN"
+            ? "00:00"
+            : formatDuration(duration)}
+        </span>
+      </div>
+      <div className="side-controls">
+        <div className="side-controls-btn">
+          <button>
+            <FontAwesomeIcon icon={faList} />
+          </button>
+        </div>
+        <div className="side-controls-btn">
+          <button>
+            <FontAwesomeIcon icon={faShuffle} />
+          </button>
+        </div>
+        <div className="side-controls-btn">
+          <button>
+            <FontAwesomeIcon icon={faRepeat} />
+          </button>
+        </div>
       </div>
       <div className="vol">
         <div>

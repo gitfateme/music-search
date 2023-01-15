@@ -81,6 +81,30 @@
     margin-top: -14px;
   }
 
+  .side-controls {
+
+    display: flex;
+    margin-left: 20px;
+
+    .side-controls-btn {
+      width: 35px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    button {
+      background-color: transparent;
+      border: 0;
+      color: var(--text);
+      border-radius: 50%;
+    }
+    button:hover {
+      color: var(--hint-text);
+    }
+  }
+
   .vol {
     display: flex;
     align-items: center;
@@ -92,6 +116,10 @@
     border: 0;
     color: var(--text);
     margin-top: 2px;
+  }
+
+  .vol-btn:hover {
+    color: var(--hint-text);
   }
   .vol-bar {
     user-select: none;
@@ -112,4 +140,5 @@
     border-radius: 6px;
     background-color: var(--hint-text);
   }
+  
 }
