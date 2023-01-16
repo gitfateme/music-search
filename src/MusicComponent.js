@@ -2,7 +2,7 @@ import "./css/MusicComponent.scss";
 import React from "react";
 import { useDispatch } from "react-redux";
 import { setCurrentMusic, setRelatedPlaylist } from "./app/musicSlice";
-import Trending from "./Trending";
+// import Trending from "./Trending";
 
 export default function MusicComponent({ music }) {
   const dispatch = useDispatch();
@@ -60,10 +60,7 @@ export default function MusicComponent({ music }) {
               : null}
             <hr />
           </div>
-          <div className="col-12 col-xl-4">
-            {/* <Trending related={JSON.parse(music.related)} /> */}
-            <Trending related={music.related} />
-          </div>
+          <div className="col-12 col-xl-4"></div>
         </div>
       </div>
     </div>

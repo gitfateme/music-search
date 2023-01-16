@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import "./css/DesktopNav.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -15,11 +15,21 @@ export default function DesktopNav() {
   const [searchKeyword, setSearchKeyword] = useState("");
   const [showResults, setShowResults] = useState(false);
   const [result, setResult] = useState([]);
+  const inputRef = useRef();
 
   const currentIndex = useSelector((state) => state.music.currentIndex);
   const music = useSelector(
     (state) => state.music.relatedPlaylist[currentIndex]
   );
+
+  async function getMusic() {
+    const res = await axios.get(
+      `https://www.radiojavan.com/api2/search?query=${searchKeyword}`
+    );
+    setResult(res.data.mp3s);
+    setShowResults(true);
+    console.log("test");
+  }
 
   useEffect(() => {
     async function getMusic() {
@@ -27,16 +37,16 @@ export default function DesktopNav() {
         `https://www.radiojavan.com/api2/search?query=${searchKeyword}`
       );
       setResult(res.data.mp3s);
+      console.log("test");
     }
     const delayedSearch = setTimeout(() => {
       if (searchKeyword.length > 2) {
         getMusic();
-
         if (result) {
           setShowResults(true);
         }
       }
-    }, 1000);
+    }, 1500);
 
     return () => clearTimeout(delayedSearch);
   }, [searchKeyword, showResults, result]);
@@ -51,12 +61,19 @@ export default function DesktopNav() {
             <FontAwesomeIcon icon={faMusic} />
           </Link>
         </div>
-        <form className="search-form">
+        <form
+          className="search-form"
+          onSubmit={(e) => {
+            e.preventDefault();
+            getMusic();
+          }}
+        >
           <input
             placeholder="جستجو..."
             onChange={(e) => {
               setSearchKeyword(e.target.value);
             }}
+            ref={inputRef}
           />
           <button>
             <FontAwesomeIcon icon={faMagnifyingGlass} />
@@ -90,7 +107,11 @@ export default function DesktopNav() {
         <div
           className="results-background"
           style={{ display: showResults ? "block" : "none" }}
-          onClick={() => setShowResults(false)}
+          onClick={() => {
+            setShowResults(false);
+            inputRef.current.value = "";
+            setSearchKeyword("");
+          }}
         ></div>
         <div
           className="search-results"
@@ -106,11 +127,7 @@ export default function DesktopNav() {
                 ? result.map((item, index) => {
                     return (
                       <li key={index}>
-                        <Link
-                          to={
-                            music ? `/musics/${item.permlink}/${item.id}` : ""
-                          }
-                        >
+                        <Link to={`/musics/${item.permlink}/${item.id}`}>
                           <img src={item.thumbnail} alt={item.title} />
                           <div className="results-names">
                             <span className="results-song">{item.song}</span>

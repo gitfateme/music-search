@@ -1,3 +1,79 @@
 .MusicPage {
   overflow-y: scroll;
+  padding: 30px;
+
+  h1 {
+    font-size: 32px;
+    margin-top: 10px;
+
+  }
+
+  h2 {
+    font-size: 16px;
+    margin-top: 10px;
+  }
+
+  h4 {
+    font-size: 22px;
+    font-weight: 200;
+  }
+
+  .music-img {
+    max-width: 265px;
+    max-height: 265px;
+    margin: 0 auto;
+    img {
+      width: 100%;
+      height: 100%;
+      border-radius: 4px;
+    }
+  }
+
+  .music-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .music-btns {
+    margin-top: 20px;
+  }
+
+  a.music-btn {
+    text-decoration: none;
+    display: block;
+    line-height: 50px;
+  }
+
+  .music-btn {
+    min-width: 100px;
+    font-size: 15px;
+    color: var(--text);
+    padding: 0 15px;
+    border-radius: 25px;
+    box-shadow: 0 0 0 0 rgb(0 0 0 / 20%), 0 0 0 0 rgb(0 0 0 / 14%), 0 0 0 0 rgb(0 0 0 / 12%);
+    min-height: 50px;
+    margin-top: 10px;
+  }
+
+  .music-play-btn{
+   background-color: var(--accent-default);
+   border: 1px solid var(--accent-default);
+   max-width: 140px;
+  }
+  .other-btn {
+    background-color: transparent;
+    border: 1px solid var(--divider-default);
+    max-width: 100px;
+  }
+}
+
+@media screen and (max-width: 768px ) {
+  .MusicPage {
+    padding: 15px;
+    h1 {
+      font-size: 24px;
+    }
+
+  }
 }
