@@ -6,8 +6,8 @@ import "./css/MusicPage.scss";
 import LoadingSpinner from "./LoadingSpinner";
 import { useSelector, useDispatch } from "react-redux";
 import { setCurrentMusic, setRelatedPlaylist } from "./app/musicSlice";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPlay, faDownload, faShare } from "@fortawesome/free-solid-svg-icons";
+// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+// import { faPlay, faDownload, faShare } from "@fortawesome/free-solid-svg-icons";
 import ItemsList from "./ItemsList";
 
 export default function MusicPage() {
@@ -56,6 +56,14 @@ export default function MusicPage() {
     dispatch(setRelatedPlaylist(music));
   }
 
+  async function copyUrl() {
+    try {
+      await navigator.clipboard.writeText(window.location.href);
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
   if (loading) {
     return (
       <div className="text-center">
@@ -87,29 +95,39 @@ export default function MusicPage() {
               </div>
               <div className="music-btns row flex-row-reverse justify-content-center justify-content-xl-start">
                 <button
-                  className="music-btn music-play-btn col-6 col-sm-4 col-md-3 col-lg-2 ms-2 ms-sm-5"
+                  className="music-btn music-play-btn col-6 col-sm-4 col-md-3 col-lg-2 ms-2 ms-sm-4 me-sm-2"
                   onClick={handlePlay}
                 >
-                  پخش آهنگ <FontAwesomeIcon icon={faPlay} />
+                  پخش آهنگ
+                  {/* <FontAwesomeIcon icon={faPlay} /> */}
                 </button>
                 <a
                   className="music-btn other-btn col-6 col-sm-4 col-md-3 col-lg-2 ms-2"
                   download
                   href={music.link}
                 >
-                  دانلود <FontAwesomeIcon icon={faDownload} />
+                  دانلود
+                  {/* <FontAwesomeIcon icon={faDownload} /> */}
                 </a>
-                <button className="music-btn other-btn col-6 col-sm-4 col-md-3 col-lg-2 ms-2">
-                  اشتراک گزاری <FontAwesomeIcon icon={faShare} />
+                <button
+                  className="music-btn other-btn col-6 col-sm-4 col-md-3 col-lg-2 ms-2"
+                  onClick={copyUrl}
+                >
+                  اشتراک گزاری
+                  {/* <FontAwesomeIcon icon={faShare} /> */}
                 </button>
               </div>
+              {music.explicit ? (
+                <span className="text-danger mt-3 warning-span">
+                  حاوی کلمات رکیک
+                </span>
+              ) : null}
             </div>
+
             {/* <MusicComponent music={music} /> */}
           </div>
           <div className="row text-center mt-5">
-            {music.lyric ? (
-              <span className="d-block my-3"> متن آهنگ</span>
-            ) : null}
+            {music.lyric ? <h4 className="d-block my-3"> متن آهنگ</h4> : null}
             {music.lyric ? <hr /> : null}
             {music.lyric
               ? music.lyric.split("\n").map((string, index) => {
