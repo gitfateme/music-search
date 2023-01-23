@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./css/MobileSearch.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
@@ -11,8 +11,29 @@ export default function MobileSearch() {
   const [searchedKeyword, setSearchedKeyword] = useState();
   const [result, setResult] = useState(null);
   const [error, setError] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    async function getMusic() {
+      const res = await axios.get(
+        `https://www.radiojavan.com/api2/search?query=${keyword}`
+      );
+      setResult(res.data);
+      setSearchedKeyword(keyword);
+      setLoading(false);
+      console.log("test");
+    }
+    const delayedSearch = setTimeout(() => {
+      if (keyword.length > 2 && keyword !== searchedKeyword) {
+        setResult(null);
+        setLoading(true);
+        getMusic();
+      }
+    }, 1500);
+
+    return () => clearTimeout(delayedSearch);
+  }, [keyword, result, searchedKeyword]);
 
   async function getMusic() {
     // const res = await axios.get("http://localhost:3000/musics", {
@@ -30,7 +51,8 @@ export default function MobileSearch() {
     if (res.data === {} || res.data.top === []) {
       setError(true);
     } else {
-      setResult(res.data.mp3s);
+      setResult(res.data);
+      setLoading(false);
     }
   }
 
@@ -39,6 +61,7 @@ export default function MobileSearch() {
     setSearchedKeyword(keyword);
     navigate("/search");
     getMusic();
+    setResult(null);
     setLoading(true);
   }
 
@@ -55,19 +78,30 @@ export default function MobileSearch() {
       <div className={`search-empty ${result ? "d-none" : ""}`}>
         <div className="search-icon-wrapper">
           <div className="search-icon">
-            {loading ? <LoadingSpinner size={"40px"} /> : null}
-            <FontAwesomeIcon icon={faMagnifyingGlass} />
+            {loading ? (
+              <LoadingSpinner size={"40px"} />
+            ) : (
+              <FontAwesomeIcon icon={faMagnifyingGlass} />
+            )}
           </div>
         </div>
         <div className="search-empty-texts">
           <span className="empty-top-span">
-            {error ? "No results" : "Search Miusic"}
+            {error ? "No results" : "Search Meowsic"}
           </span>
           <span className="empty-bot-span">Find musics, lyrics and more .</span>
         </div>
       </div>
       <div className={`search-results-container ${result ? "" : "d-none"}`}>
-        <Outlet context={[keyword, result, searchedKeyword]} />
+        {result != null ? (
+          result.mp3s.length < 1 &&
+          result.lyrics.length < 1 &&
+          result !== {} ? (
+            <p className="text-center">چیزی پیدا نشد</p>
+          ) : (
+            <Outlet context={[keyword, result, searchedKeyword]} />
+          )
+        ) : null}
       </div>
     </div>
   );

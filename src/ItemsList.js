@@ -9,19 +9,25 @@ import useViewport from "./useViewPort";
 import axios from "axios";
 import { Link } from "react-router-dom";
 
-export default function ItemsList({ data }) {
+export default function ItemsList({ data, playlist, trendingData }) {
   const { width } = useViewport();
   const breakpoint = 768;
-
   const dispatch = useDispatch();
 
   async function setMusic(music) {
     await axios
       .get(`https://www.radiojavan.com/api2/mp3?id=${music.id}`)
       .then((r) => {
-        console.log(r.data.song);
         dispatch(setCurrentMusic(r.data));
-        dispatch(setRelatedPlaylist(r.data));
+        if (playlist === "trending") {
+          const data = {
+            ...r.data,
+            related: trendingData.filter((data) => data.id !== music.id),
+          };
+          dispatch(setRelatedPlaylist(data));
+        } else {
+          dispatch(setRelatedPlaylist(r.data));
+        }
       });
     // dispatch(setCurrentMusic(music));
     // dispatch(setRelatedPlaylist(music));

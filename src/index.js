@@ -10,9 +10,9 @@ import Home from "./Home";
 import Search from "./Search";
 import {
   TopResults,
-  ArtistsReults,
   SongsResults,
   AlbumsResults,
+  LyricsResults,
 } from "./ResultsComponent";
 import MusicPage from "./MusicPage";
 
@@ -39,8 +39,8 @@ const router = createBrowserRouter([
             element: <TopResults />,
           },
           {
-            path: "/search/artists",
-            element: <ArtistsReults />,
+            path: "/search/lyrics",
+            element: <LyricsResults />,
           },
           {
             path: "/search/songs",

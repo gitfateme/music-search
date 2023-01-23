@@ -14,6 +14,13 @@ export default function App() {
     getData();
   }, []);
 
+  async function getData() {
+    const res = await axios.get(
+      "https://www.radiojavan.com/api2/browse_items?"
+    );
+    setData(res.data);
+  }
+
   //for server but im trying api rn
   // async function getData() {
   //   // const res = await axios.get("http://localhost:3000/trendings");
@@ -25,13 +32,6 @@ export default function App() {
   //   //     .catch((e) => console.log(e))
   //   // );
   // }
-
-  async function getData() {
-    const res = await axios.get(
-      "https://www.radiojavan.com/api2/browse_items?"
-    );
-    setData(res.data);
-  }
 
   return width < breakpoint ? (
     <MobileApp data={data} />

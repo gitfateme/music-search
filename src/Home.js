@@ -19,6 +19,7 @@ export default function Home() {
   const [itemsPerPage, setItemsPerPage] = useState(0);
 
   const data = useOutletContext();
+  console.log(data);
 
   useEffect(() => {
     if (width > 1200) {
@@ -68,7 +69,11 @@ export default function Home() {
                 <FontAwesomeIcon icon={faChevronRight} />
               </span>
             </div>
-            <ItemsList data={trending.slice(0, 10)} />
+            <ItemsList
+              data={trending.slice(0, 10)}
+              playlist={"trending"}
+              trendingData={trending}
+            />
           </div>
           <div className="new-releases-container mt-4">
             <div className="heading-2 d-flex">

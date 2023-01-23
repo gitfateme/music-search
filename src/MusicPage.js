@@ -22,6 +22,10 @@ export default function MusicPage() {
 
   useEffect(() => {
     document.title = `${music.artist} - ${music.song} - Meowzic.com`;
+    if (music.link) {
+      const musicPage = document.querySelector(".MusicPage");
+      musicPage.scrollIntoView({ behavior: "smooth" });
+    }
   }, [music]);
 
   useEffect(() => {
@@ -72,7 +76,7 @@ export default function MusicPage() {
     );
   } else {
     return (
-      <div className="MusicPage ">
+      <div className="MusicPage">
         <div className="container">
           <div className="row flex-row-reverse text-center text-xl-end">
             <div className="col-12 col-xl-3">

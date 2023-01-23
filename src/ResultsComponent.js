@@ -18,9 +18,6 @@ export function TopResults() {
         dispatch(setCurrentMusic(r.data));
         dispatch(setRelatedPlaylist(r.data));
       });
-
-    // dispatch(setCurrentMusic(music));
-    // dispatch(setRelatedPlaylist(music));
   }
 
   // function getHighlightedText(text, highlight) {
@@ -43,7 +40,10 @@ export function TopResults() {
       <div className="nav-container">
         <nav className="tab-nav">
           <Link className="tab-link active" to="/search">
-            Top Results
+            آهنگ ها
+          </Link>
+          <Link className="tab-link " to="/search/lyrics">
+            متن آهنگ
           </Link>
           {/* <Link className="tab-link" to="/search/artists">
             Artists
@@ -58,9 +58,9 @@ export function TopResults() {
       </div>
       <section className="tabs">
         <div className="mobile-top-results">
-          {data ? (
+          {data && data !== null ? (
             <ul>
-              {data.map((data, index) => {
+              {data.mp3s.map((data, index) => {
                 return (
                   <li key={index}>
                     <button onClick={(e) => setMusic(data)}>
@@ -82,35 +82,69 @@ export function TopResults() {
       </section>
     </div>
   ) : (
-    <>test</>
+    <>something went wrong here in top results component</>
   );
 }
 
-export function ArtistsReults() {
+export function LyricsResults() {
   const { width } = useViewport();
   const breakpoint = 768;
 
-  console.log("artists results component rendered");
+  const data = useOutletContext()[1];
+  console.log(data);
+  const dispatch = useDispatch();
+  async function setMusic(music) {
+    await axios
+      .get(`https://www.radiojavan.com/api2/mp3?id=${music.id}`)
+      .then((r) => {
+        console.log(r.data.song);
+        dispatch(setCurrentMusic(r.data));
+        dispatch(setRelatedPlaylist(r.data));
+      });
+  }
+
+  console.log("lyrics results component rendered");
   return width < breakpoint ? (
     <div>
       <div className="nav-container">
         <nav className="tab-nav">
           <Link className="tab-link " to="/search">
-            Top Results
+            آهنگ ها
           </Link>
-          <Link className="tab-link active" to="/search/artists">
-            Artists
-          </Link>
-          <Link className="tab-link" to="/search/songs">
-            Songs
-          </Link>
-          <Link className="tab-link" to="/search/albums">
-            Albums
+          <Link className="tab-link active" to="/search/lyrics">
+            متن آهنگ
           </Link>
         </nav>
       </div>
       <section className="tabs">
-        <div>Artists Component</div>
+        <div className="mobile-top-results">
+          {data && data !== null ? (
+            <ul>
+              {data.lyrics.map((data, index) => {
+                return (
+                  <li key={index} style={{ height: "100px" }}>
+                    <button
+                      onClick={(e) => setMusic(data)}
+                      style={{ height: "80px" }}
+                    >
+                      <span className="song-span">{data.song}</span>
+                      <span className="artist-span">{data.artist}</span>
+                      <span className="artist-span">
+                        "{data.lyric_snippet}"
+                      </span>
+                    </button>
+                    <button
+                      className="options-btn"
+                      onClick={(e) => console.log("...")}
+                    >
+                      <FontAwesomeIcon icon={faEllipsis} />
+                    </button>
+                  </li>
+                );
+              })}
+            </ul>
+          ) : null}
+        </div>
       </section>
     </div>
   ) : (

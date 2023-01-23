@@ -10,7 +10,6 @@ export const musicSlice = createSlice({
   reducers: {
     setCurrentMusic(state, action) {
       state.data = action.payload;
-      console.log(state.data);
       state.currentIndex = 0;
     },
     setRelatedPlaylist(state, action) {
