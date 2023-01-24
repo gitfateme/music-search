@@ -48,15 +48,12 @@ export default function MobileControls() {
 
   useEffect(() => {
     setPlaying(true);
-  }, [setPlaying, music]);
-
-  useEffect(() => {
-    if (audioRef.current && playing) {
+    if (audioRef.current) {
       audioRef.current.pause();
       audioRef.current.load();
       audioRef.current.play();
     }
-  }, [playing]);
+  }, [setPlaying, music]);
 
   function calcClickedTime(e) {
     const clickPositionInPage = e.pageX;
