@@ -30,20 +30,16 @@ export default function MobileControls() {
 
   useEffect(() => {
     if (curPercentage >= 100) {
-      // setPlaying(false);
-      // setCurTime(0);
       dispatch(goNext());
     }
   }, [curPercentage, dispatch]);
 
   useEffect(() => {
     setPlaying(true);
-
-    if (audioRef.current) {
+    if (audioRef.current && playing) {
       audioRef.current.pause();
       audioRef.current.load();
       audioRef.current.play();
-      console.log(music);
     }
   }, [setPlaying, music]);
 
