@@ -10,6 +10,7 @@ import axios from "axios";
 
 export function TopResults() {
   const dispatch = useDispatch();
+
   async function setMusic(music) {
     await axios
       .get(`https://www.radiojavan.com/api2/mp3?id=${music.id}`)

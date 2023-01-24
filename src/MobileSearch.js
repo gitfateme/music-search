@@ -22,7 +22,9 @@ export default function MobileSearch() {
       setResult(res.data);
       setSearchedKeyword(keyword);
       setLoading(false);
-      console.log("test");
+      if (res.data.lyrics.length > 0 && res.data.mp3s.length < 1) {
+        navigate("/search/lyrics");
+      }
     }
     const delayedSearch = setTimeout(() => {
       if (keyword.length > 2 && keyword !== searchedKeyword) {
@@ -47,20 +49,24 @@ export default function MobileSearch() {
     const res = await axios.get(
       `https://www.radiojavan.com/api2/search?query=${keyword}`
     );
-    console.log(res.data);
+
     if (res.data === {} || res.data.top === []) {
       setError(true);
     } else {
       setResult(res.data);
       setLoading(false);
+      if (res.data.lyrics.length > 0 && res.data.mp3s.length < 1) {
+        console.log(res.data);
+        navigate("/search/lyrics");
+      }
     }
   }
 
   function handleSubmit(e) {
     e.preventDefault();
     setSearchedKeyword(keyword);
-    navigate("/search");
     getMusic();
+    navigate("/search");
     setResult(null);
     setLoading(true);
   }
