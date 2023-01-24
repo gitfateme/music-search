@@ -35,7 +35,7 @@ export default function MobileSearch() {
     }, 1500);
 
     return () => clearTimeout(delayedSearch);
-  }, [keyword, result, searchedKeyword]);
+  }, [keyword, result, searchedKeyword, navigate]);
 
   async function getMusic() {
     // const res = await axios.get("http://localhost:3000/musics", {

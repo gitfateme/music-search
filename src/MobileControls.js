@@ -53,7 +53,7 @@ export default function MobileControls() {
       audioRef.current.load();
       audioRef.current.play();
     }
-  }, [setPlaying, music]);
+  }, [setPlaying, music, playing]);
 
   function calcClickedTime(e) {
     const clickPositionInPage = e.pageX;
