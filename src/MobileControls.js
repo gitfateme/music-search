@@ -35,6 +35,18 @@ export default function MobileControls() {
   }, [curPercentage, dispatch]);
 
   useEffect(() => {
+    if (playing) {
+      navigator.mediaSession.setActionHandler("pause", () => {
+        setPlaying(false);
+      });
+    } else {
+      navigator.mediaSession.setActionHandler("play", () => {
+        setPlaying(true);
+      });
+    }
+  }, [playing, setPlaying]);
+
+  useEffect(() => {
     setPlaying(true);
     if (audioRef.current && playing) {
       audioRef.current.pause();
