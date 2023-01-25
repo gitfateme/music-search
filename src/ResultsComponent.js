@@ -32,11 +32,12 @@ export function TopResults() {
   //   );
   // }
 
-  const { width } = useViewport();
-  const breakpoint = 768;
+  // const { width } = useViewport();
+  // const breakpoint = 768;
   const data = useOutletContext()[1];
   // const keyword = useOutletContext()[2];
-  return width < breakpoint ? (
+  // return width < breakpoint ? (
+  return (
     <div>
       <div className="nav-container">
         <nav className="tab-nav">
@@ -47,14 +48,14 @@ export function TopResults() {
             متن آهنگ
           </Link>
           {/* <Link className="tab-link" to="/search/artists">
-            Artists
-          </Link>
-          <Link className="tab-link" to="/search/songs">
-            Songs
-          </Link>
-          <Link className="tab-link" to="/search/albums">
-            Albums
-          </Link> */}
+          Artists
+        </Link>
+        <Link className="tab-link" to="/search/songs">
+          Songs
+        </Link>
+        <Link className="tab-link" to="/search/albums">
+          Albums
+        </Link> */}
         </nav>
       </div>
       <section className="tabs">
@@ -82,15 +83,13 @@ export function TopResults() {
         </div>
       </section>
     </div>
-  ) : (
-    <>something went wrong here in top results component</>
   );
+  // ) : (
+  //   <>something went wrong here in top results component</>
+  // );
 }
 
 export function LyricsResults() {
-  const { width } = useViewport();
-  const breakpoint = 768;
-
   const data = useOutletContext()[1];
   console.log(data);
   const dispatch = useDispatch();
@@ -105,7 +104,7 @@ export function LyricsResults() {
   }
 
   console.log("lyrics results component rendered");
-  return width < breakpoint ? (
+  return (
     <div>
       <div className="nav-container">
         <nav className="tab-nav">
@@ -148,8 +147,6 @@ export function LyricsResults() {
         </div>
       </section>
     </div>
-  ) : (
-    <>test</>
   );
 }
 

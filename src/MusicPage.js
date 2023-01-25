@@ -21,7 +21,6 @@ export default function MusicPage() {
   const { musicId } = useParams();
 
   useEffect(() => {
-    document.title = `${music.artist} - ${music.song} - Meowzic.com`;
     if (music.link) {
       const musicPage = document.querySelector(".MusicPage");
       musicPage.scrollIntoView({ behavior: "smooth" });

@@ -9,6 +9,7 @@ export const musicSlice = createSlice({
   },
   reducers: {
     setCurrentMusic(state, action) {
+      document.title = `${action.payload.artist} - ${action.payload.song} - Meowzic.com`;
       state.data = action.payload;
       state.currentIndex = 0;
     },
@@ -24,6 +25,9 @@ export const musicSlice = createSlice({
       } else {
         state.currentIndex = 0;
       }
+      document.title = `${state.relatedPlaylist[state.currentIndex].artist} - ${
+        state.relatedPlaylist[state.currentIndex].song
+      } - Meowzic.com`;
     },
     goPrev(state) {
       if (state.currentIndex === 0) {
@@ -31,6 +35,9 @@ export const musicSlice = createSlice({
       } else {
         state.currentIndex -= 1;
       }
+      document.title = `${state.relatedPlaylist[state.currentIndex].artist} - ${
+        state.relatedPlaylist[state.currentIndex].song
+      } - Meowzic.com`;
     },
   },
 });
