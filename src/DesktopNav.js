@@ -6,15 +6,18 @@ import {
   faCat,
   faMagnifyingGlass,
   faHome,
+  faChevronLeft,
 } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import axios from "axios";
+import LoadingSpinner from "./LoadingSpinner";
 
 export default function DesktopNav() {
   const [searchKeyword, setSearchKeyword] = useState("");
   const [showResults, setShowResults] = useState(false);
   const [result, setResult] = useState([]);
+  const [searching, setSearching] = useState(false);
   const inputRef = useRef();
 
   const currentIndex = useSelector((state) => state.music.currentIndex);
@@ -23,27 +26,34 @@ export default function DesktopNav() {
   );
 
   async function getMusic() {
+    setSearching(true);
     const res = await axios.get(
       `https://www.radiojavan.com/api2/search?query=${searchKeyword}`
     );
-    setResult(res.data.mp3s);
+    setResult(res.data);
     setShowResults(true);
     console.log("test");
+    setSearchKeyword("");
+    setSearching(false);
   }
 
   useEffect(() => {
     async function getMusic() {
+      setSearching(true);
+
       const res = await axios.get(
         `https://www.radiojavan.com/api2/search?query=${searchKeyword}`
       );
-      setResult(res.data.mp3s);
+      setResult(res.data);
       console.log("test");
+      setSearching(false);
     }
     const delayedSearch = setTimeout(() => {
       if (searchKeyword.length > 2) {
         getMusic();
         if (result) {
           setShowResults(true);
+          setSearchKeyword("");
         }
       }
     }, 1500);
@@ -75,9 +85,16 @@ export default function DesktopNav() {
             }}
             ref={inputRef}
           />
-          <button>
-            <FontAwesomeIcon icon={faMagnifyingGlass} />
-          </button>
+
+          {searching ? (
+            <div className="search-spinner">
+              <LoadingSpinner size={"22px"} thickness={"2px"} />
+            </div>
+          ) : (
+            <button>
+              <FontAwesomeIcon icon={faMagnifyingGlass} />{" "}
+            </button>
+          )}
         </form>
         <Link to={"/"} style={{ textDecoration: "none" }}>
           <div className="nav-item ">
@@ -109,6 +126,7 @@ export default function DesktopNav() {
           style={{ display: showResults ? "block" : "none" }}
           onClick={() => {
             setShowResults(false);
+            setResult([]);
             inputRef.current.value = "";
             setSearchKeyword("");
           }}
@@ -121,13 +139,33 @@ export default function DesktopNav() {
             className="search-results-inner"
             style={{ display: showResults ? "block" : "none" }}
           >
-            <h3>نتایج جستجو</h3>
+            <Link
+              to={`/search`}
+              className="show-all"
+              onClick={() => {
+                setShowResults(false);
+                setResult([]);
+                inputRef.current.value = "";
+                setSearchKeyword("");
+              }}
+            >
+              <FontAwesomeIcon icon={faChevronLeft} />
+              ... نمایش همه ی نتایج
+            </Link>
             <ul className="results-songs">
-              {result
-                ? result.map((item, index) => {
+              {result.mp3s
+                ? result.mp3s.map((item, index) => {
                     return (
                       <li key={index}>
-                        <Link to={`/musics/${item.permlink}/${item.id}`}>
+                        <Link
+                          to={`/musics/${item.permlink}/${item.id}`}
+                          onClick={() => {
+                            setShowResults(false);
+                            setResult([]);
+                            inputRef.current.value = "";
+                            setSearchKeyword("");
+                          }}
+                        >
                           <img src={item.thumbnail} alt={item.title} />
                           <div className="results-names">
                             <span className="results-song">{item.song}</span>
