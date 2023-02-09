@@ -1,13 +1,7 @@
 import React from "react";
 import "./css/MobileNav.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faMagnifyingGlass,
-  faMusic,
-  faRankingStar,
-  faHouse,
-  faUser,
-} from "@fortawesome/free-solid-svg-icons";
+import { faMagnifyingGlass, faHouse } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 
 export default function MobileNav() {
@@ -22,12 +16,12 @@ export default function MobileNav() {
             <span className="mobilenav-text">Home</span>
           </div>
         </Link>
-        <div className="mobilenav-item  mobilenav-disabled">
+        {/* <div className="mobilenav-item  mobilenav-disabled">
           <div className="mobilenav-icon">
             <FontAwesomeIcon icon={faRankingStar} />
           </div>
           <span className="mobilenav-text">Top 50</span>
-        </div>
+        </div> */}
         <Link to="/search">
           <div className="mobilenav-item">
             <div className="mobilenav-icon">
@@ -36,7 +30,7 @@ export default function MobileNav() {
             <span className="mobilenav-text">Search</span>
           </div>
         </Link>
-        <div className="mobilenav-item  mobilenav-disabled">
+        {/* <div className="mobilenav-item  mobilenav-disabled">
           <div className="mobilenav-icon">
             <FontAwesomeIcon icon={faMusic} />
           </div>
@@ -47,7 +41,7 @@ export default function MobileNav() {
             <FontAwesomeIcon icon={faUser} />
           </div>
           <span className="mobilenav-text">Account</span>
-        </div>
+        </div> */}
       </nav>
     </div>
   );
