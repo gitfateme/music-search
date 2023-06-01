@@ -1,4 +1,4 @@
-# Meowsic. music player webapp with lyrics and
+# Meowsic. music player webapp with lyrics and search in music title and lyrics.
 Created using Radio javan api. (Use vpn)
 
 
